@@ -18,8 +18,11 @@
 
   while (i < imgData.data.length) {
     _ref = [imgData.data[i], imgData.data[i + 1], imgData.data[i + 2]], r = _ref[0], g = _ref[1], b = _ref[2];
+    hsv.push(window.rgb2hsl(r, g, b));
     i += 4;
   }
+
+  console.log(hsv);
 
   window.clustering(points);
 

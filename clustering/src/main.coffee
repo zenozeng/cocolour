@@ -7,5 +7,7 @@ hsv = []
 i = 0
 while( i < imgData.data.length )
   [r, g, b] = [imgData.data[i], imgData.data[i+1], imgData.data[i+2]]
+  hsv.push window.rgb2hsl(r, g, b)
   i += 4
+console.log hsv
 window.clustering(points)
