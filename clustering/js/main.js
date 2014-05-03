@@ -9,8 +9,8 @@
   img.onload = function() {
     var b, canvas, ctx, g, h, i, image, imgData, maxHeight, maxWidth, points, r, scale, w, _ref, _ref1;
     image = this;
-    maxWidth = 500;
-    maxHeight = 500;
+    maxWidth = 200;
+    maxHeight = 200;
     scale = Math.max(image.width / maxWidth, image.height / maxHeight, 1);
     _ref = [image.width, image.height].map(function(elem) {
       return parseInt(elem / scale);

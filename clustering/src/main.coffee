@@ -5,8 +5,8 @@ img.onload = ->
   image = this
 
   # todo calc scale based on w and h
-  maxWidth = 500 # todo: config
-  maxHeight = 500 # todo: config
+  maxWidth = 200 # todo: config
+  maxHeight = 200 # todo: config
   scale = Math.max (image.width / maxWidth), (image.height / maxHeight), 1
 
   [w, h] = [image.width, image.height].map (elem) -> parseInt (elem / scale)
