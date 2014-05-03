@@ -1,4 +1,3 @@
-ctx = document.getElementById("canvas").getContext("2d")
 url = "test.min.jpg"
 img = new Image()
 img.onload = ->
@@ -6,13 +5,19 @@ img.onload = ->
   image = this
 
   # todo calc scale based on w and h
-  scale = 2.5
+  maxWidth = 500 # todo: config
+  maxHeight = 500 # todo: config
+  scale = Math.max (image.width / maxWidth), (image.height / maxHeight), 1
 
   [w, h] = [image.width, image.height].map (elem) -> parseInt (elem / scale)
-  console.log {w: w, h: h}
-  canvas.style.width = "#{w}px"
-  canvas.style.height = "#{h}px"
+
+  canvas = document.createElement("canvas");
+  canvas.width = w
+  canvas.height = h
+  ctx = canvas.getContext "2d"
   ctx.drawImage this, 0, 0, image.width, image.height, 0, 0, w, h
+
+  document.body.appendChild canvas
 
   imgData = ctx.getImageData(0, 0, w, h)
   points = []
@@ -23,4 +28,5 @@ img.onload = ->
     i += 4
   console.log points.length
   window.clustering(points)
+
 img.src = url
