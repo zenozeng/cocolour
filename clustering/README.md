@@ -16,6 +16,10 @@ see http://zh.wikipedia.org/wiki/HSL%E5%92%8CHSV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%9
 
 1000 * 562 JPEG
 
+## Args
+
+maxSize: 200 * 200
+
 ## RGB2HSL
 
 ### 速度测试 / 图像测试

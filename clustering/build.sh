@@ -1,1 +1,1 @@
-coffee -co js src/
+coffee --watch -co js src/*.coffee
