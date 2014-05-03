@@ -3,6 +3,8 @@
   var clustering;
 
   clustering = function(points) {
+    var clusterCount;
+    clusterCount = 16;
     return null;
   };
 

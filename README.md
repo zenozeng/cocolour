@@ -6,6 +6,9 @@
 
 Resize 到 `maxWidth` & `maxHeight`
 
-### 建立 HSL 坐标系
+### RGB 2 HSL
 
-### 颜色聚类
+## Clustering
+
+### k-means algorithm
+
