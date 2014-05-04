@@ -141,7 +141,6 @@
       canvas.height = h;
       ctx = canvas.getContext("2d");
       ctx.drawImage(this, 0, 0, image.width, image.height, 0, 0, w, h);
-      document.body.appendChild(canvas);
       imgData = ctx.getImageData(0, 0, w, h);
       points = [];
       i = 0;
