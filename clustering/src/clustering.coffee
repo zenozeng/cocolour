@@ -96,8 +96,8 @@ clustering = (points, config) ->
   # init centers
   centers = []
   clusters = []
-  for h in [0, 45, 90, 135, 180, 225, 270, 315]
-    for s in [50]
+  for h in [0, 90, 180, 270]
+    for s in [25, 75]
       for l in [25, 75]
         centers.push [h, s, l]
   for i in [0...N]

@@ -22,7 +22,7 @@ box.ondrop = (event) ->
   reader = new FileReader
   reader.onload = (event) ->
     dataURL = event.target.result
-    clustering {maxWidth: 100, maxHeight: 100, url: dataURL, debug: off}, (centers) ->
+    clustering {maxWidth: 50, maxHeight: 50, url: dataURL, debug: off}, (centers) ->
       display centers
     box.style.backgroundImage = "url(#{dataURL})"
   reader.readAsDataURL file

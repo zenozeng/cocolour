@@ -114,10 +114,10 @@
     };
     centers = [];
     clusters = [];
-    _ref = [0, 45, 90, 135, 180, 225, 270, 315];
+    _ref = [0, 90, 180, 270];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       h = _ref[_i];
-      _ref1 = [50];
+      _ref1 = [25, 75];
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         s = _ref1[_j];
         _ref2 = [25, 75];

@@ -39,8 +39,8 @@
       var dataURL;
       dataURL = event.target.result;
       clustering({
-        maxWidth: 100,
-        maxHeight: 100,
+        maxWidth: 50,
+        maxHeight: 50,
         url: dataURL,
         debug: false
       }, function(centers) {
