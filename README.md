@@ -8,7 +8,7 @@ Resize 到 `maxWidth` & `maxHeight`
 
 ### RGB 2 HSL
 
-## [TODO] Clustering
+## Clustering
 
 ### k-means algorithm
 
