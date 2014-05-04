@@ -26,4 +26,4 @@ Resize 到 `maxWidth` & `maxHeight`
 
 - 2014-04-28 -- 2014-05-04
 
-    使用 K-Means 实现基本色彩聚类
+    基于 K-Means 算法以及 HSL 色彩空间实现基本色彩聚类

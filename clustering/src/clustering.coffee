@@ -8,6 +8,42 @@ else
     args.forEach (val) -> sum += val * val
     Math.sqrt sum
 
+# r, g, b [0, 255]
+# return h [0, 360], s [0, 1], v [0, 1]
+rgb2hsl = (r, g, b) ->
+  [r, g, b] = [r, g, b].map (elem) -> elem / 255
+
+  max = Math.max r, g, b
+  min = Math.min r, g, b
+
+  # 计算色相
+  if max is min
+    h = 0
+  else if max is r and g >= b
+    h = 60 * (g - b) / (max - min)
+  else if max is r and g < b
+    h = 60 * (g - b) / (max - min) + 360
+  else if max is g
+    h = 60 * (b - r) / (max - min) + 120
+  else
+    h = 60 * (r - g) / (max - min) + 240
+
+  # 计算饱和度
+  l = (max + min) / 2
+
+  # 计算亮度
+  if max is min or l is 0
+    s = 0
+  else if l > 0 and l <= 0.5
+    s = (max - min) / (max + min)
+  else
+    s = (max - min) / (2 - (max + min))
+
+  h = parseInt(h)
+  [s, l] = [s, l].map (elem) -> Math.round(elem * 100) / 100
+  return [h, s, l]
+
+
 calcDistance = (p1, p2) ->
   weights = [1, 0.8, 0.8] # 一个权重常数，暂时先用这个，注意是有平方关系的
   delta = p1.map (val, i) -> (val - p2[i]) * weights[i]
@@ -108,7 +144,7 @@ clusteringWrapper = (config) ->
     i = 0
     while( i < imgData.data.length )
       [r, g, b] = [imgData.data[i], imgData.data[i+1], imgData.data[i+2]]
-      points.push window.rgb2hsl(r, g, b)
+      points.push rgb2hsl(r, g, b)
       i += 4
     centers = clustering(points, {debug: on, display: display})
 
