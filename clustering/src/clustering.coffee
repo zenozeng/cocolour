@@ -15,39 +15,46 @@ calcDistance = (p1, p2) ->
   delta = p1.map (val, i) -> (val - p2[i]) * weights[i]
   hypot delta
 
-calcCenter = (points) ->
-  if points.length is 0
-    return null
-  # 该坐标系为圆柱坐标系
-  L = math.mean points.map (point) -> point[2]
-  x = math.mean points.map (point) ->
-    [h, s, l] = point
-    s * math.cos(math.unit(h, 'deg'))
-  y = math.mean points.map (point) ->
-    [h, s, l] = point
-    s * math.sin(math.unit(h, 'deg'))
-  S = Math.sqrt(x * x + y * y)
-  atan = Math.atan(y / x)
-  H = atan / Math.PI * 180
-  H += 360 if H < 0
-  [H, S, L].map (elem) -> parseInt elem
-  # 取原先存在的最接近平均值的点来代替平均值
-  newCenter = 0
-  minDistance = null
-  for point in points
-    d = calcDistance(point, [H, S, L])
-    if (! minDistance?) or (d < minDistance)
-      minDistance = d
-      newCenter = point
-  newCenter
-
 clustering = (points) ->
   points = points.map (point) ->
      [h, s, l] = point
      s *= 100
      l *= 100
      [h, s, l]
+  imagePixels = points
   N = 16
+
+  calcCenter = (points) ->
+    if points.length is 0
+      console.log "NOT FOUND"
+      # 这个中心点没有任何接近的值，从原图中随机找一个点
+      center = imagePixels[parseInt(Math.random() * imagePixels.length)]
+      console.log center
+      return center
+      # return points[parseInt(Math.random() * points.length)]
+    # 该坐标系为圆柱坐标系
+    L = math.mean points.map (point) -> point[2]
+    x = math.mean points.map (point) ->
+      [h, s, l] = point
+      s * math.cos(math.unit(h, 'deg'))
+    y = math.mean points.map (point) ->
+      [h, s, l] = point
+      s * math.sin(math.unit(h, 'deg'))
+    S = Math.sqrt(x * x + y * y)
+    atan = Math.atan(y / x)
+    H = atan / Math.PI * 180
+    H += 360 if H < 0
+    [H, S, L].map (elem) -> parseInt elem
+    # 取原先存在的最接近平均值的点来代替平均值
+    newCenter = 0
+    minDistance = null
+    for point in points
+      d = calcDistance(point, [H, S, L])
+      if (! minDistance?) or (d < minDistance)
+        minDistance = d
+        newCenter = point
+    newCenter
+
   # init centers
   centers = []
   clusters = []
