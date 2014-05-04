@@ -31,6 +31,15 @@ calcCenter = (points) ->
   H = atan / Math.PI * 180
   H += 360 if H < 0
   [H, S, L].map (elem) -> parseInt elem
+  # 取原先存在的最接近平均值的点来代替平均值
+  newCenter = 0
+  minDistance = null
+  for point in points
+    d = calcDistance(point, [H, S, L])
+    if (! minDistance?) or (d < minDistance)
+      minDistance = d
+      newCenter = point
+  newCenter
 
 clustering = (points) ->
   points = points.map (point) ->
@@ -38,7 +47,7 @@ clustering = (points) ->
      s *= 100
      l *= 100
      [h, s, l]
-  n = 16
+  N = 16
   # init centers
   centers = []
   clusters = []
@@ -46,7 +55,7 @@ clustering = (points) ->
     for s in [50]
       for l in [25, 75]
         centers.push [h, s, l]
-  for i in [0..15]
+  for i in [0...N]
     clusters.push []
   display centers if debug
   # TODO: 受初始值影响非常大
@@ -55,7 +64,7 @@ clustering = (points) ->
       # 分配给最近 cluster
       minIndex = 0 # 最小距离的聚类
       minDistance = null
-      for i in [0..15]
+      for i in [0...N]
         d = calcDistance(centers[i], point)
         if (! minDistance?) or (d < minDistance)
           minIndex = i

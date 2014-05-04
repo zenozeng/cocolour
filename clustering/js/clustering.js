@@ -27,7 +27,7 @@
   };
 
   calcCenter = function(points) {
-    var H, L, S, atan, x, y;
+    var H, L, S, atan, d, minDistance, newCenter, point, x, y, _i, _len;
     if (points.length === 0) {
       return null;
     }
@@ -50,13 +50,24 @@
     if (H < 0) {
       H += 360;
     }
-    return [H, S, L].map(function(elem) {
+    [H, S, L].map(function(elem) {
       return parseInt(elem);
     });
+    newCenter = 0;
+    minDistance = null;
+    for (_i = 0, _len = points.length; _i < _len; _i++) {
+      point = points[_i];
+      d = calcDistance(point, [H, S, L]);
+      if ((minDistance == null) || (d < minDistance)) {
+        minDistance = d;
+        newCenter = point;
+      }
+    }
+    return newCenter;
   };
 
   clustering = function(points) {
-    var calc, centers, clusters, h, i, l, n, s, _i, _j, _k, _l, _len, _len1, _len2, _ref, _ref1, _ref2;
+    var N, calc, centers, clusters, h, i, l, s, _i, _j, _k, _l, _len, _len1, _len2, _ref, _ref1, _ref2;
     points = points.map(function(point) {
       var h, l, s;
       h = point[0], s = point[1], l = point[2];
@@ -64,7 +75,7 @@
       l *= 100;
       return [h, s, l];
     });
-    n = 16;
+    N = 16;
     centers = [];
     clusters = [];
     _ref = [0, 45, 90, 135, 180, 225, 270, 315];
@@ -80,7 +91,7 @@
         }
       }
     }
-    for (i = _l = 0; _l <= 15; i = ++_l) {
+    for (i = _l = 0; 0 <= N ? _l < N : _l > N; i = 0 <= N ? ++_l : --_l) {
       clusters.push([]);
     }
     if (debug) {
@@ -92,7 +103,7 @@
         point = points[_m];
         minIndex = 0;
         minDistance = null;
-        for (i = _n = 0; _n <= 15; i = ++_n) {
+        for (i = _n = 0; 0 <= N ? _n < N : _n > N; i = 0 <= N ? ++_n : --_n) {
           d = calcDistance(centers[i], point);
           if ((minDistance == null) || (d < minDistance)) {
             minIndex = i;
