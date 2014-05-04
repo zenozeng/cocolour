@@ -1,18 +1,24 @@
 # Colors Project
 
-## 预处理
+## 目前支持
 
-### Resize
+Image: jpg, png
+
+## 简介
+
+### 预处理
+
+#### Resize
 
 Resize 到 `maxWidth` & `maxHeight`
 
-### RGB 2 HSL
+#### RGB 2 HSL
 
-## Clustering
+### Clustering
 
-### k-means algorithm
+#### k-means algorithm
 
-## [TODO] Machine Learning
+### [TODO] Machine Learning
 
 ## 项目日程
 

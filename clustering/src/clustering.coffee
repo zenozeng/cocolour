@@ -1,3 +1,5 @@
+math = new mathjs
+
 if Math.hypot?
   hypot = Math.hypot # for higher performence in es6
 else
@@ -100,7 +102,7 @@ clustering = (points, config) ->
         centers.push [h, s, l]
   for i in [0...N]
     clusters.push []
-  display centers if debug
+  display?(centers) if debug
   # TODO: 受初始值影响非常大
   calc = ->
     for point in points
@@ -115,12 +117,12 @@ clustering = (points, config) ->
       clusters[minIndex].push point
     # 得到结果，取平均数
     centers = clusters.map (cluster) -> calcCenter cluster
-    display centers if debug
+    display?(centers) if debug
   calc()
   calc()
   centers
 
-clusteringWrapper = (config) ->
+clusteringWrapper = (config, callback) ->
   {maxWidth, maxHeight, url, debug, display} = config
 
   img = new Image()
@@ -147,6 +149,7 @@ clusteringWrapper = (config) ->
       points.push rgb2hsl(r, g, b)
       i += 4
     centers = clustering(points, {debug: on, display: display})
+    callback?(centers)
 
   img.src = url
 
