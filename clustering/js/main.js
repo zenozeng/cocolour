@@ -2,6 +2,8 @@
 (function() {
   var img, url;
 
+  window.math = new mathjs;
+
   url = "test.min.jpg";
 
   img = new Image();

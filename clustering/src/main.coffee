@@ -1,3 +1,5 @@
+window.math = new mathjs
+
 url = "test.min.jpg"
 img = new Image()
 img.onload = ->

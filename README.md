@@ -14,3 +14,8 @@ Resize 到 `maxWidth` & `maxHeight`
 
 ## [TODO] Machine Learning
 
+## 项目日程
+
+2014-03-05 First Commit
+
+2014-03-19 -- 2014-05-04 基本调研，初始化项目，服务器基本部署，色彩聚类代码初步
