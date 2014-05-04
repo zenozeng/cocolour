@@ -1,5 +1,12 @@
 window.math = new mathjs
 
+display = (colors) ->
+  html = colors.map (color) ->
+    [h, s, l] = color
+    "<div class='color' style='background: hsl(#{h}, #{s}%, #{l}%)'></div>"
+  html = "<div class='colors'>#{html.join('')}</div>"
+  document.getElementById("colors").innerHTML = html
+
 url = "test.min.jpg"
 img = new Image()
 img.onload = ->
@@ -29,6 +36,7 @@ img.onload = ->
     points.push window.rgb2hsl(r, g, b)
     i += 4
   console.log points.length
-  window.clustering(points)
+  centers = window.clustering(points)
+  display centers
 
 img.src = url
