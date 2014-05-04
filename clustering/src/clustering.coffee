@@ -1,17 +1,17 @@
 if Math.hypot?
   hypot = Math.hypot # for higher performence in es6
 else
-  hypot = (args...) ->
+  hypot = (args) ->
     # Here use foreach for perfermence
     # http://jsperf.com/array-reduce-vs-foreach/2
     sum = 0
-    sum = args.forEach (val) -> sum += val
+    args.forEach (val) -> sum += val * val
     Math.sqrt sum
 
-distance = (p1, p2) ->
+calcDistance = (p1, p2) ->
   weights = [1, 0.8, 0.8] # 一个权重常数，暂时先用这个，注意是有平方关系的
   delta = p1.map (val, i) -> (val - p2[i]) * weights[i]
-  hypot.apply this, delta
+  hypot delta
 
 calcCenter = (points) ->
   if points.length is 0
@@ -35,6 +35,7 @@ clustering = (points) ->
      s *= 100
      l *= 100
      [h, s, l]
+  points = points.filter (points, i) -> i < 10000 # for testing
   n = 16
   centers = []
   clusters = []
@@ -49,13 +50,12 @@ clustering = (points) ->
     minIndex = 0 # 最小距离的聚类
     minDistance = null
     for i in [0..15]
-      d = distance(centers[i], point)
+      d = calcDistance(centers[i], point)
       if (! minDistance?) or (d < minDistance)
         minIndex = i
         minDistance = d
     clusters[minIndex].push [h, s, l]
   # 得到结果，取平均数
   centers = clusters.map (cluster) -> calcCenter cluster
-  console.log centers
 
 window.clustering = clustering
