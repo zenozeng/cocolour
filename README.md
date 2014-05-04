@@ -26,4 +26,4 @@ Resize 到 `maxWidth` & `maxHeight`
 
 - 2014-04-28 -- 2014-05-04
 
-    尝试用 K-Means 实现色彩聚类
+    使用 K-Means 实现基本色彩聚类

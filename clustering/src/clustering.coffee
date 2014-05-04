@@ -1,5 +1,3 @@
-debug = on
-
 if Math.hypot?
   hypot = Math.hypot # for higher performence in es6
 else
@@ -15,7 +13,10 @@ calcDistance = (p1, p2) ->
   delta = p1.map (val, i) -> (val - p2[i]) * weights[i]
   hypot delta
 
-clustering = (points) ->
+clustering = (points, config) ->
+
+  {debug, display} = config
+
   points = points.map (point) ->
      [h, s, l] = point
      s *= 100
@@ -26,7 +27,6 @@ clustering = (points) ->
 
   calcCenter = (points) ->
     if points.length is 0
-      console.log "NOT FOUND"
       # 这个中心点没有任何接近的值，从原图中随机找一个点
       center = imagePixels[parseInt(Math.random() * imagePixels.length)]
       console.log center
@@ -82,6 +82,38 @@ clustering = (points) ->
     display centers if debug
   calc()
   calc()
-  calc()
+  centers
 
-window.clustering = clustering
+clusteringWrapper = (config) ->
+  {maxWidth, maxHeight, url, debug, display} = config
+
+  img = new Image()
+  img.onload = ->
+
+    image = this
+
+    # todo calc scale based on w and h
+    scale = Math.max (image.width / maxWidth), (image.height / maxHeight), 1
+
+    [w, h] = [image.width, image.height].map (elem) -> parseInt (elem / scale)
+
+    canvas = document.createElement("canvas");
+    canvas.width = w
+    canvas.height = h
+    ctx = canvas.getContext "2d"
+    ctx.drawImage this, 0, 0, image.width, image.height, 0, 0, w, h
+
+    document.body.appendChild canvas
+
+    imgData = ctx.getImageData(0, 0, w, h)
+    points = []
+    i = 0
+    while( i < imgData.data.length )
+      [r, g, b] = [imgData.data[i], imgData.data[i+1], imgData.data[i+2]]
+      points.push window.rgb2hsl(r, g, b)
+      i += 4
+    centers = clustering(points, {debug: on, display: display})
+
+  img.src = url
+
+window.clustering = clusteringWrapper
