@@ -1,11 +1,13 @@
 window.math = new mathjs
 
-display = (colors) ->
+window.display = (colors) ->
   html = colors.map (color) ->
+    unless color?
+      color = [0, 0, 100]
     [h, s, l] = color
     "<div class='color' style='background: hsl(#{h}, #{s}%, #{l}%)'></div>"
-  html = "<div class='colors'>#{html.join('')}</div>"
-  document.getElementById("colors").innerHTML = html
+  html = "<div class='colors'><h2>Clusters</h2>#{html.join('')}</div>"
+  document.getElementById("colors").innerHTML += html
 
 url = "test.min.jpg"
 img = new Image()
@@ -37,6 +39,5 @@ img.onload = ->
     i += 4
   console.log points.length
   centers = window.clustering(points)
-  display centers
 
 img.src = url

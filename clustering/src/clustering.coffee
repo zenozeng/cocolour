@@ -1,3 +1,5 @@
+debug = on
+
 if Math.hypot?
   hypot = Math.hypot # for higher performence in es6
 else
@@ -27,6 +29,7 @@ calcCenter = (points) ->
   S = Math.sqrt(x * x + y * y)
   atan = Math.atan(y / x)
   H = atan / Math.PI * 180
+  H += 360 if H < 0
   [H, S, L].map (elem) -> parseInt elem
 
 clustering = (points) ->
@@ -35,8 +38,9 @@ clustering = (points) ->
      s *= 100
      l *= 100
      [h, s, l]
-  points = points.filter (points, i) -> i < 10000 # for testing
+  # points = points.filter (points, i) -> i < 10000 # for testing
   n = 16
+  # init centers
   centers = []
   clusters = []
   for h in [0, 45, 90, 135, 180, 225, 270, 315]
@@ -45,17 +49,23 @@ clustering = (points) ->
         centers.push [h, s, l]
   for i in [0..15]
     clusters.push []
-  for point in points
-    # 分配给最近 cluster
-    minIndex = 0 # 最小距离的聚类
-    minDistance = null
-    for i in [0..15]
-      d = calcDistance(centers[i], point)
-      if (! minDistance?) or (d < minDistance)
-        minIndex = i
-        minDistance = d
-    clusters[minIndex].push [h, s, l]
-  # 得到结果，取平均数
-  centers = clusters.map (cluster) -> calcCenter cluster
+  display centers if debug
+  calc = ->
+    for point in points
+      # 分配给最近 cluster
+      minIndex = 0 # 最小距离的聚类
+      minDistance = null
+      for i in [0..15]
+        d = calcDistance(centers[i], point)
+        if (! minDistance?) or (d < minDistance)
+          minIndex = i
+          minDistance = d
+      clusters[minIndex].push point
+    # 得到结果，取平均数
+    centers = clusters.map (cluster) -> calcCenter cluster
+    display centers if debug
+  calc()
+  calc()
+  calc()
 
 window.clustering = clustering
