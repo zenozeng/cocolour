@@ -9,15 +9,15 @@ window.display = (colors) ->
   html = "<div class='colors'><h2>Clusters</h2>#{html.join('')}</div>"
   document.getElementById("colors").innerHTML += html
 
-url = "test.min.jpg"
+url = "test2.jpg"
 img = new Image()
 img.onload = ->
 
   image = this
 
   # todo calc scale based on w and h
-  maxWidth = 200 # todo: config
-  maxHeight = 200 # todo: config
+  maxWidth = 100 # todo: config
+  maxHeight = 100 # todo: config
   scale = Math.max (image.width / maxWidth), (image.height / maxHeight), 1
 
   [w, h] = [image.width, image.height].map (elem) -> parseInt (elem / scale)

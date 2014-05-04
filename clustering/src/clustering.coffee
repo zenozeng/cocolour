@@ -38,7 +38,6 @@ clustering = (points) ->
      s *= 100
      l *= 100
      [h, s, l]
-  # points = points.filter (points, i) -> i < 10000 # for testing
   n = 16
   # init centers
   centers = []
@@ -50,6 +49,7 @@ clustering = (points) ->
   for i in [0..15]
     clusters.push []
   display centers if debug
+  # TODO: 受初始值影响非常大
   calc = ->
     for point in points
       # 分配给最近 cluster

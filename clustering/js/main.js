@@ -18,15 +18,15 @@
     return document.getElementById("colors").innerHTML += html;
   };
 
-  url = "test.min.jpg";
+  url = "test2.jpg";
 
   img = new Image();
 
   img.onload = function() {
     var b, canvas, centers, ctx, g, h, i, image, imgData, maxHeight, maxWidth, points, r, scale, w, _ref, _ref1;
     image = this;
-    maxWidth = 200;
-    maxHeight = 200;
+    maxWidth = 100;
+    maxHeight = 100;
     scale = Math.max(image.width / maxWidth, image.height / maxHeight, 1);
     _ref = [image.width, image.height].map(function(elem) {
       return parseInt(elem / scale);
