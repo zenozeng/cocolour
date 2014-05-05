@@ -1,8 +1,6 @@
-# Colors Project
+# Cocolour
 
-## 目前支持
-
-Image: jpg, png
+Color matching system based on machine learning
 
 ## 简介
 
