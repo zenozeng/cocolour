@@ -42,8 +42,17 @@ Resize 到 `maxWidth` & `maxHeight`
 
 ### 2014-05-05 -- 2014-05-11
 
-- New Name: cocolour
+- New name: cocolour
 
-- New Domain: cocolour.com
+- New domain: cocolour.com
 
 - Deploy on Github Pages
+
+- Move clustering/ to new repo: zenozeng/colors-clustering
+
+- Use CIEDE2000 for calc color difference
+
+- [TODO] Add test for CIEDE2000
+
+- [TODO] Rewrite clolors-clustering using K-Means algorithm & CIEDE2000,
+  use seeds from CSS Color Module Level 3.
