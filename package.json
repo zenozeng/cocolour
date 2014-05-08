@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "color-convert": "latest",
+        "colors-clustering": ">=0.1.1"
+    }
+}

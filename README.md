@@ -30,7 +30,7 @@ Resize 到 `maxWidth` & `maxHeight`
 
 - Move clustering/ to new repo: zenozeng/colors-clustering
 
-- Use seeds from CSS Color Module Level 3.
+- Use seeds from CSS Color Module Level 3
 
 - Use CIEDE2000 for calc color difference
 
@@ -41,6 +41,10 @@ Resize 到 `maxWidth` & `maxHeight`
     see https://github.com/zenozeng/colors-clustering/issues/7
 
 - Add nodejs support for colors-clustering
+
+- Npm publish zenozeng/colors-clustering
+
+- Rewrite cocolour using zenozeng/colors-clustering
 
 ### 2014-04-28 -- 2014-05-04
 
