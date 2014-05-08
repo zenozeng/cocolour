@@ -949,15 +949,12 @@ var box, colorsClustering, display;
 
 colorsClustering = require("colors-clustering");
 
-display = function(colors) {
+display = function(clusters) {
   var html;
-  html = colors.map(function(color) {
-    var h, l, s;
-    if (color == null) {
-      color = [0, 0, 100];
-    }
-    h = color[0], s = color[1], l = color[2];
-    return "<div class='color' style='background: hsl(" + h + ", " + s + "%, " + l + "%)'></div>";
+  html = clusters.map(function(cluster) {
+    var color;
+    color = cluster.color;
+    return "<div class='color' style='background: rgb(" + (color.join(',')) + ")'></div>";
   });
   html = "<div class='colors'>" + (html.join('')) + "</div>";
   return document.getElementById("colors").innerHTML = html;
@@ -976,17 +973,20 @@ box.ondragend = function(event) {
 };
 
 box.ondrop = function(event) {
-  var url;
+  var img, url;
   box.innerHTML = "";
+  box.style.lineHeight = 0;
   document.getElementById("colors").innerHTML = "Calculating...";
   event.preventDefault();
   url = URL.createObjectURL(event.dataTransfer.files[0]);
   colorsClustering({
     src: url
   }, function(clusters) {
-    return console.log(clusters);
+    return display(clusters);
   });
-  return box.style.backgroundImage = "url(" + url + ")";
+  img = new Image;
+  img.src = url;
+  return box.appendChild(img);
 };
 
 

@@ -46,6 +46,8 @@ Resize 到 `maxWidth` & `maxHeight`
 
 - Rewrite cocolour using zenozeng/colors-clustering
 
+- New UI for cocolour
+
 ### 2014-04-28 -- 2014-05-04
 
 - 基于 K-Means 算法以及 HSL 色彩空间实现基本色彩聚类

@@ -1,11 +1,9 @@
 colorsClustering = require "colors-clustering"
 
-display = (colors) ->
-  html = colors.map (color) ->
-    unless color?
-      color = [0, 0, 100]
-    [h, s, l] = color
-    "<div class='color' style='background: hsl(#{h}, #{s}%, #{l}%)'></div>"
+display = (clusters) ->
+  html = clusters.map (cluster) ->
+    color = cluster.color
+    "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
   html = "<div class='colors'>#{html.join('')}</div>"
   document.getElementById("colors").innerHTML = html
 
@@ -18,9 +16,12 @@ box.ondragend = (event) ->
   event.preventDefault()
 box.ondrop = (event) ->
   box.innerHTML = ""
+  box.style.lineHeight = 0
   document.getElementById("colors").innerHTML = "Calculating..."
   event.preventDefault()
   url = URL.createObjectURL(event.dataTransfer.files[0])
   colorsClustering {src: url}, (clusters) ->
-    console.log clusters
-  box.style.backgroundImage = "url(#{url})"
+    display clusters
+  img = new Image
+  img.src = url
+  box.appendChild img

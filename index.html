@@ -4,39 +4,35 @@
     <title>Colors Project</title>
     <style>
      body {
-        padding: 4em;
-        color: #555;
+         padding: 4em;
+         padding-top: 2em;
+         color: #555;
+         max-width: 800px;
+         margin: 0 auto;
      }
      header {
-        padding-bottom: 2em;
+         padding-bottom: 2em;
      }
      #image {
-         float: left;
-         width: calc(100% - 424px);
-         height: 400px;
-         margin-right: 20px;
-         line-height: 400px;
-         text-align: center;
+         width: 100%;
          border: 1px solid #ccc;
-         background-position: center center;
-         background-size: cover;
-     }
-     #colors {
-         float: left;
-         border: 1px solid #ccc;
-         width: 400px;
+         line-height: 200px;
          text-align: center;
-         line-height: 400px;
-         height: 400px;
      }
-     #colors h2 {
-         width: 400px;
-         text-align: center;
+     #image img {
+         width: 100%;
+     }
+     #colors::after {
+        clear: both;
+        content: "";
+        display: block;
      }
      .color {
          float: left;
-         width: 100px;
-         height: 100px;
+         width: 3vw;
+         height: 3vw;
+         margin: 1vw 1vw 0 0;
+         border: 1px solid #ccc;
      }
     </style>
 </head>
