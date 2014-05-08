@@ -983,8 +983,11 @@ box.ondrop = function(event) {
     minCount: 7
   };
   colorsClustering(config, function(clusters) {
-    var C, colorMatchings, html;
+    var C, colorMatchings, html, schemes;
     display(clusters);
+    clusters.sort(function(a, b) {
+      return b.weight - a.weight;
+    });
     colorMatchings = [];
     C = function(arr, n) {
       var iter, results;
@@ -1004,12 +1007,12 @@ box.ondrop = function(event) {
       iter([], arr, n);
       return results;
     };
-    colorMatchings = C([0, 1, 2, 3, 4, 5, 6], 5).map(function(colorMatching) {
-      return colorMatching.map(function(i) {
+    schemes = C([0, 1, 2, 3, 4, 5, 6], 5).map(function(scheme) {
+      return scheme.map(function(i) {
         return clusters[i].color;
       });
     });
-    html = colorMatchings.map(function(colors) {
+    html = schemes.map(function(colors) {
       var tmp;
       tmp = colors.map(function(color) {
         return "<div class='color' style='background: rgb(" + (color.join(',')) + ")'></div>";

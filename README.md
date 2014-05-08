@@ -2,19 +2,17 @@
 
 Color matching system based on machine learning
 
-## 简介
-
-### 预处理
-
-#### Resize
-
-Resize 到 `maxWidth` & `maxHeight`
-
-#### RGB 2 HSL
+## Intro
 
 ### Clustering
 
-#### k-means algorithm
+#### Resize
+
+based on `maxWidth` and `maxHeight`
+
+#### RGB 2 Lab
+
+#### k-means algorithm & CIE76
 
 ### [TODO] Machine Learning
 

@@ -24,6 +24,7 @@ box.ondrop = (event) ->
     minCount: 7
   colorsClustering config, (clusters) ->
     display clusters
+    clusters.sort (a, b) -> b.weight - a.weight
     colorMatchings = []
     # 列出选择排列的所有可能性
     C = (arr, n) ->
@@ -39,10 +40,12 @@ box.ondrop = (event) ->
     # schemes = C([0...clusters.length], 5).map (scheme) ->
     #   scheme.map (i) -> clusters[i].color
     # console.log schemes
-    # for now
-    colorMatchings = C([0...7], 5).map (colorMatching) ->
-      colorMatching.map (i) -> clusters[i].color
-    html = colorMatchings.map (colors) ->
+
+    # 目前只用了前 7 种颜色进行组合
+    schemes = C([0...7], 5).map (scheme) ->
+      scheme.map (i) -> clusters[i].color
+
+    html = schemes.map (colors) ->
       tmp = colors.map (color) ->
         "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
       "<div class='scheme'>#{tmp.join('')}</div>"
