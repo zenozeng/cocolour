@@ -15,13 +15,40 @@ box.ondragend = (event) ->
   this.className = ''
   event.preventDefault()
 box.ondrop = (event) ->
-  box.innerHTML = ""
   box.style.lineHeight = 0
   document.getElementById("colors").innerHTML = "Calculating..."
   event.preventDefault()
   url = URL.createObjectURL(event.dataTransfer.files[0])
-  colorsClustering {src: url}, (clusters) ->
+  config =
+    src: url
+    minCount: 7
+  colorsClustering config, (clusters) ->
     display clusters
+    colorMatchings = []
+    # 列出选择排列的所有可能性
+    C = (arr, n) ->
+      results = []
+      iter = (t, arr, n) ->
+        if n is 0
+          results.push t
+        else
+          for i in [0..(arr.length - n)]
+            iter t.concat(arr[i]), arr.slice(i+1), (n - 1)
+      iter [], arr, n
+      results
+    # schemes = C([0...clusters.length], 5).map (scheme) ->
+    #   scheme.map (i) -> clusters[i].color
+    # console.log schemes
+    # for now
+    colorMatchings = C([0...7], 5).map (colorMatching) ->
+      colorMatching.map (i) -> clusters[i].color
+    html = colorMatchings.map (colors) ->
+      tmp = colors.map (color) ->
+        "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
+      "<div class='scheme'>#{tmp.join('')}</div>"
+    document.getElementById("schemes").innerHTML = html.join('')
   img = new Image
   img.src = url
-  box.appendChild img
+  img.onload = ->
+    box.innerHTML = ""
+    box.appendChild img

@@ -973,20 +973,57 @@ box.ondragend = function(event) {
 };
 
 box.ondrop = function(event) {
-  var img, url;
-  box.innerHTML = "";
+  var config, img, url;
   box.style.lineHeight = 0;
   document.getElementById("colors").innerHTML = "Calculating...";
   event.preventDefault();
   url = URL.createObjectURL(event.dataTransfer.files[0]);
-  colorsClustering({
-    src: url
-  }, function(clusters) {
-    return display(clusters);
+  config = {
+    src: url,
+    minCount: 7
+  };
+  colorsClustering(config, function(clusters) {
+    var C, colorMatchings, html;
+    display(clusters);
+    colorMatchings = [];
+    C = function(arr, n) {
+      var iter, results;
+      results = [];
+      iter = function(t, arr, n) {
+        var i, _i, _ref, _results;
+        if (n === 0) {
+          return results.push(t);
+        } else {
+          _results = [];
+          for (i = _i = 0, _ref = arr.length - n; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+            _results.push(iter(t.concat(arr[i]), arr.slice(i + 1), n - 1));
+          }
+          return _results;
+        }
+      };
+      iter([], arr, n);
+      return results;
+    };
+    colorMatchings = C([0, 1, 2, 3, 4, 5, 6], 5).map(function(colorMatching) {
+      return colorMatching.map(function(i) {
+        return clusters[i].color;
+      });
+    });
+    html = colorMatchings.map(function(colors) {
+      var tmp;
+      tmp = colors.map(function(color) {
+        return "<div class='color' style='background: rgb(" + (color.join(',')) + ")'></div>";
+      });
+      return "<div class='scheme'>" + (tmp.join('')) + "</div>";
+    });
+    return document.getElementById("schemes").innerHTML = html.join('');
   });
   img = new Image;
   img.src = url;
-  return box.appendChild(img);
+  return img.onload = function() {
+    box.innerHTML = "";
+    return box.appendChild(img);
+  };
 };
 
 

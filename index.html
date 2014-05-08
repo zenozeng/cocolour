@@ -7,7 +7,7 @@
          padding: 4em;
          padding-top: 2em;
          color: #555;
-         max-width: 800px;
+         max-width: 600px;
          margin: 0 auto;
      }
      header {
@@ -27,12 +27,26 @@
         content: "";
         display: block;
      }
-     .color {
+     #colors .color {
          float: left;
-         width: 3vw;
-         height: 3vw;
-         margin: 1vw 1vw 0 0;
+         width: 20px;
+         height: 20px;
+         margin: 6px 6px 0 0;
          border: 1px solid #ccc;
+     }
+     #schemes {
+        margin-top: 30px;
+     }
+     .scheme::after {
+         clear: both;
+         display: block;
+         content: "";
+     }
+     .scheme .color {
+         float: left;
+         width: 50px;
+         height: 50px;
+        margin-top: 30px;
      }
     </style>
 </head>
@@ -46,6 +60,8 @@
             Drag Your Image Here
         </div>
         <div id="colors">
+        </div>
+        <div id="schemes">
         </div>
     </main>
     <script src="js/main.js"></script>
