@@ -3,53 +3,7 @@
     <meta charset="UTF-8">
     <title>Cocolour</title>
     <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
-    <style>
-     body {
-         padding: 4em;
-         padding-top: 2em;
-         color: #555;
-         max-width: 600px;
-         margin: 0 auto;
-     }
-     header {
-         padding-bottom: 2em;
-     }
-     #image {
-         width: 100%;
-         border: 1px solid #ccc;
-         line-height: 200px;
-         text-align: center;
-     }
-     #image img {
-         width: 100%;
-     }
-     #colors::after {
-        clear: both;
-        content: "";
-        display: block;
-     }
-     #colors .color {
-         float: left;
-         width: 20px;
-         height: 20px;
-         margin: 6px 6px 0 0;
-         border: 1px solid #ccc;
-     }
-     #schemes {
-        margin-top: 30px;
-     }
-     .scheme::after {
-         clear: both;
-         display: block;
-         content: "";
-     }
-     .scheme .color {
-         float: left;
-         width: 50px;
-         height: 50px;
-        margin-top: 30px;
-     }
-    </style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <header>
@@ -57,10 +11,12 @@
         Create colours, together!
     </header>
     <main id="main">
-        <div id="image">
-            Drag Your Image Here
-        </div>
-        <div id="colors">
+        <div id="meta">
+            <div id="image">
+                Drag Your Image Here
+            </div>
+            <div id="colors">
+            </div>
         </div>
         <div id="schemes">
         </div>

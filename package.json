@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "color-convert": "latest",
+        "jquery": ">=2.1.0",
         "colors-clustering": ">=0.1.1"
     }
 }

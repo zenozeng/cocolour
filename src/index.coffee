@@ -1,4 +1,5 @@
 colorsClustering = require "colors-clustering"
+$ = require "jquery"
 
 display = (clusters) ->
   html = clusters.map (cluster) ->
@@ -48,8 +49,13 @@ box.ondrop = (event) ->
     html = schemes.map (colors) ->
       tmp = colors.map (color) ->
         "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
-      "<div class='scheme'>#{tmp.join('')}</div>"
+      "<div class='scheme'>#{tmp.join('')}
+        <i class='fa fa-heart-o button'></i>
+        <i class='fa fa-trash-o button'></i></div>"
     document.getElementById("schemes").innerHTML = html.join('')
+    $('.scheme .button').click ->
+      $scheme
+      $(this).toggleClass 'selected'
   img = new Image
   img.src = url
   img.onload = ->
