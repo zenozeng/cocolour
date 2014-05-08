@@ -20,9 +20,33 @@ Resize 到 `maxWidth` & `maxHeight`
 
 ## 项目日程
 
-### 2014-03-05 -- 2014-03-16
+### 2014-05-05 -- 2014-05-11
 
-- Init Repo
+- New name: cocolour
+
+- New domain: cocolour.com
+
+- Deploy on Github Pages
+
+- Move clustering/ to new repo: zenozeng/colors-clustering
+
+- Use seeds from CSS Color Module Level 3.
+
+- Use CIEDE2000 for calc color difference
+
+- Add RGBA Support for Colors Clustering
+
+- Switch to CIE67 for perfermence
+
+    see https://github.com/zenozeng/colors-clustering/issues/7
+
+- Add nodejs support for colors-clustering
+
+### 2014-04-28 -- 2014-05-04
+
+- 基于 K-Means 算法以及 HSL 色彩空间实现基本色彩聚类
+
+- Init UI (based on HTML5 drag & drop API)
 
 ### 2014-03-17 -- 2014-04-27
 
@@ -34,25 +58,6 @@ Resize 到 `maxWidth` & `maxHeight`
 
 - 色彩聚类代码初步
 
-### 2014-04-28 -- 2014-05-04
+### 2014-03-05 -- 2014-03-16
 
-- 基于 K-Means 算法以及 HSL 色彩空间实现基本色彩聚类
-
-- Init UI (based on HTML5 drag & drop API)
-
-### 2014-05-05 -- 2014-05-11
-
-- New name: cocolour
-
-- New domain: cocolour.com
-
-- Deploy on Github Pages
-
-- Move clustering/ to new repo: zenozeng/colors-clustering
-
-- Use CIEDE2000 for calc color difference
-
-- [TODO] Add test for CIEDE2000
-
-- [TODO] Rewrite clolors-clustering using K-Means algorithm & CIEDE2000,
-  use seeds from CSS Color Module Level 3.
+- Init Repo
