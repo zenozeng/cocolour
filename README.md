@@ -1,6 +1,6 @@
 # Cocolour
 
-Color matching system based on machine learning
+Color schemes generator based on machine learning
 
 ## Intro
 
@@ -15,6 +15,27 @@ based on `maxWidth` and `maxHeight`
 #### k-means algorithm & CIE76
 
 ### [TODO] Machine Learning
+
+## Development
+
+```
+sudo npm install -g grunt-cli
+npm install
+```
+
+### Build
+
+`grunt build`
+
+### Watch
+
+`grunt watch`
+
+## Production
+
+```
+npm install --production
+```
 
 ## 项目日程
 
@@ -45,6 +66,8 @@ based on `maxWidth` and `maxHeight`
 - Rewrite cocolour using zenozeng/colors-clustering
 
 - New UI for cocolour
+
+- Use Grunt as task runner
 
 - [TODO] 复用 img，允许传入 img 给 colors-clustering
 
