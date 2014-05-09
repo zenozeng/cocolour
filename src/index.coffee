@@ -8,14 +8,12 @@ display = (clusters) ->
   html = "<div class='colors'>#{html.join('')}</div>"
   document.getElementById("colors").innerHTML = html
 
-box = document.getElementById("image")
-box.ondragover = (event) ->
-  this.className = 'hover'
+document.body.ondragover = (event) ->
   event.preventDefault()
-box.ondragend = (event) ->
-  this.className = ''
+document.body.ondragend = (event) ->
   event.preventDefault()
-box.ondrop = (event) ->
+document.body.ondrop = (event) ->
+  box = document.getElementById("image")
   box.style.lineHeight = 0
   document.getElementById("colors").innerHTML = "Calculating..."
   event.preventDefault()
@@ -54,7 +52,6 @@ box.ondrop = (event) ->
         <i class='fa fa-trash-o button'></i></div>"
     document.getElementById("schemes").innerHTML = html.join('')
     $('.scheme .button').click ->
-      $scheme
       $(this).toggleClass 'selected'
   img = new Image
   img.src = url
