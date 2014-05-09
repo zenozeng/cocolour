@@ -87,8 +87,9 @@ body
 
 @media (min-width: 1200px)
   body
-    margin 0 auto
-    width 1150px
+    // 用 padding 而非 margin 保证 body dropable
+    padding-left calc(50% - 575px)
+    padding-right calc(50% - 575px)
   #header
     width 550px
     float left
