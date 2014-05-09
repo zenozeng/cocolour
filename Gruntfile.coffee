@@ -18,13 +18,15 @@ module.exports = (grunt) ->
             dest: "js/main.js"
           }
         ]
+    clean:
+      js: ["js/main.js"]
     watch:
       scripts:
         files: ["src/*.coffee", "static/stylus/*.styl"]
         tasks: ["build"],
 
-  ["uglify", "watch", "stylus"].map (name) ->
+  ["uglify", "watch", "stylus", "clean"].map (name) ->
     grunt.loadNpmTasks "grunt-contrib-#{name}"
   grunt.loadNpmTasks "grunt-coffeeify"
 
-  grunt.registerTask "build", ["stylus", "coffeeify", "uglify"]
+  grunt.registerTask "build", ["stylus", "coffeeify", "uglify", "clean"]

@@ -69,12 +69,6 @@ npm install --production
 
 - Use Grunt as task runner
 
-- [TODO] 复用 img，允许传入 img 给 colors-clustering
-
-- [TODO] Improve UI when drop file （缓和动画）
-
-- [TODO] 重构配色产生方案，考虑距离因素，不要直接穷举，缩减可能性
-
 ### 2014-04-28 -- 2014-05-04
 
 - 基于 K-Means 算法以及 HSL 色彩空间实现基本色彩聚类
