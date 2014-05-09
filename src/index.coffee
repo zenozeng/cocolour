@@ -1,3 +1,6 @@
+if !Array.prototype.map
+  window.location.href = "http://browsehappy.com/"
+
 colorsClustering = require "colors-clustering"
 $ = require "jquery"
 
