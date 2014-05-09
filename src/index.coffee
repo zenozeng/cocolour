@@ -17,15 +17,13 @@ body.ondrag = (event) -> event.preventDefault()
 body.ondrop = (event) ->
   event.preventDefault()
   box = document.getElementById("image")
-  box.style.lineHeight = 0
-  document.getElementById("colors").innerHTML = "Calculating..."
   url = URL.createObjectURL(event.dataTransfer.files[0])
   config =
     src: url
     minCount: 7
   colorsClustering config, (clusters) ->
-    display clusters
     clusters.sort (a, b) -> b.weight - a.weight
+    display clusters
     colorMatchings = []
     # 列出选择排列的所有可能性
     C = (arr, n) ->
@@ -56,7 +54,8 @@ body.ondrop = (event) ->
     $('.scheme .button').click ->
       $(this).toggleClass 'selected'
   img = new Image
-  img.src = url
   img.onload = ->
+    box.style.lineHeight = 0
     box.innerHTML = ""
     box.appendChild img
+  img.src = url
