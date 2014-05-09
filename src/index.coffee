@@ -8,15 +8,17 @@ display = (clusters) ->
   html = "<div class='colors'>#{html.join('')}</div>"
   document.getElementById("colors").innerHTML = html
 
-document.body.ondragover = (event) ->
+body = document.body
+body.ondragover = (event) -> event.preventDefault()
+body.ondragend = (event) -> event.preventDefault()
+body.ondragenter = (event) -> event.preventDefault()
+body.ondragleave = (event) -> event.preventDefault()
+body.ondrag = (event) -> event.preventDefault()
+body.ondrop = (event) ->
   event.preventDefault()
-document.body.ondragend = (event) ->
-  event.preventDefault()
-document.body.ondrop = (event) ->
   box = document.getElementById("image")
   box.style.lineHeight = 0
   document.getElementById("colors").innerHTML = "Calculating..."
-  event.preventDefault()
   url = URL.createObjectURL(event.dataTransfer.files[0])
   config =
     src: url
