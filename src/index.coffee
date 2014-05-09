@@ -51,8 +51,32 @@ body.ondrop = (event) ->
         <i class='fa fa-heart-o button'></i>
         <i class='fa fa-trash-o button'></i></div>"
     document.getElementById("schemes").innerHTML = html.join('')
-    $('.scheme .button').click ->
-      $(this).toggleClass 'selected'
+    (->
+      getScore = ($scheme) ->
+        if $scheme.find('.fa-heart-o').hasClass 'selected'
+          1
+        else if $scheme.find('.fa-trash-o').hasClass 'selected'
+          -1
+        else
+          0
+      setScore = ($scheme, score) ->
+        console.log score
+        $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
+        $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
+        # todo: send to server
+      $('.scheme .fa-heart-o').click ->
+        $scheme = $(this).parents('.scheme')
+        if getScore($scheme) is 1
+          setScore $scheme, 0
+        else
+          setScore $scheme, 1
+      $('.scheme .fa-trash-o').click ->
+        $scheme = $(this).parents('.scheme')
+        if getScore($scheme) is -1
+          setScore $scheme, 0
+        else
+          setScore $scheme, -1
+    )()
   img = new Image
   img.onload = ->
     box.style.lineHeight = 0
