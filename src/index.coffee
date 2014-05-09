@@ -60,7 +60,6 @@ body.ondrop = (event) ->
         else
           0
       setScore = ($scheme, score) ->
-        console.log score
         $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
         $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
         # todo: send to server
@@ -76,6 +75,7 @@ body.ondrop = (event) ->
           setScore $scheme, 0
         else
           setScore $scheme, -1
+          $scheme.appendTo($('#schemes'));
     )()
   img = new Image
   img.onload = ->

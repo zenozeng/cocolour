@@ -22,6 +22,8 @@ module.exports = (grunt) ->
       js: ["js/main.js"]
     watch:
       scripts:
+        options:
+          livereload: true
         files: ["src/*.coffee", "static/stylus/*.styl"]
         tasks: ["build"],
 
