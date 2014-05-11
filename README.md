@@ -68,7 +68,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Copyright (C) 2014 Zeno Zeng
 
-    MIT License
+    Released under the MIT license
 
 ## 项目日程
 
@@ -103,6 +103,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 - Use Grunt as task runner
 
 - UI for 1920 * 1080
+
+- New Repo: cocolour-server
 
 ### 2014-04-28 -- 2014-05-04
 
