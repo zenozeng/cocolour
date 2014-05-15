@@ -1,0 +1,18 @@
+<!doctype html>
+<style>
+#submit {display: inline-block; border: 1px solid #777; padding: 1em; cursor: pointer}
+</style>
+<h2>Username</h2>
+<input type="text" id="username">
+<h2>Password</h2>
+<input type="password" id="password">
+<br>
+<br>
+<div id="submit">Login</div>
+<script>
+ document.getElementById('submit').onclick = function() {
+     localStorage.setItem('username', document.getElementById('username').value);
+     localStorage.setItem('password', document.getElementById('password').value);
+     alert('password saved');
+ }
+</script>

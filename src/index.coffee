@@ -67,11 +67,21 @@ body.ondrop = (event) ->
         $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
         $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
         url = "http://jp.zenozeng.com:26080"
+        username = localStorage.getItem('username')
+        password = localStorage.getItem('password')
         data =
           scheme: JSON.stringify($scheme.data('scheme'))
           score: score
+          username: username
+          password: password
         console.log data
-        $.get url, data
+        success = (data) -> console.log data
+        error = -> alert '服务器貌似坏了，告诉zeno吧'
+        $.ajax
+          url: url
+          data: data
+          success: success
+          error: error
       $('.scheme .fa-heart-o').click ->
         $scheme = $(this).parents('.scheme')
         if getScore($scheme) is 1

@@ -72,6 +72,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-05-12 -- 2014-05-18
+
+- Simple JSON based user system
+
+- Simple loging system for replaying requests later
+
 ### 2014-05-05 -- 2014-05-11
 
 - New name: cocolour
