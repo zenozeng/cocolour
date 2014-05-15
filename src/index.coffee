@@ -3,6 +3,7 @@ if !Array.prototype.map
 
 colorsClustering = require "colors-clustering"
 $ = require "jquery"
+window.$ = $
 
 display = (clusters) ->
   html = clusters.map (cluster) ->
@@ -50,7 +51,7 @@ body.ondrop = (event) ->
     html = schemes.map (colors) ->
       tmp = colors.map (color) ->
         "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
-      "<div class='scheme'>#{tmp.join('')}
+      "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>#{tmp.join('')}
         <i class='fa fa-heart-o button'></i>
         <i class='fa fa-trash-o button'></i></div>"
     document.getElementById("schemes").innerHTML = html.join('')
@@ -65,7 +66,12 @@ body.ondrop = (event) ->
       setScore = ($scheme, score) ->
         $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
         $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
-        # todo: send to server
+        url = "http://jp.zenozeng.com:26080"
+        data =
+          scheme: JSON.stringify($scheme.data('scheme'))
+          score: score
+        console.log data
+        $.get url, data
       $('.scheme .fa-heart-o').click ->
         $scheme = $(this).parents('.scheme')
         if getScore($scheme) is 1

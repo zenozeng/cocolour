@@ -24,7 +24,7 @@ module.exports = (grunt) ->
       scripts:
         options:
           livereload: true
-        files: ["src/*.coffee", "static/stylus/*.styl"]
+        files: ["src/[^#]*.coffee", "static/stylus/*.styl"]
         tasks: ["build"],
 
   ["uglify", "watch", "stylus", "clean"].map (name) ->
