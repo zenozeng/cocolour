@@ -8,23 +8,13 @@ module.exports = (grunt) ->
       main:
         files:
           "js/main.min.js": "js/main.js"
-    coffeeify:
-      options:
-        debug: true
-      main:
-        files: [
-          {
-            src: ["src/index.coffee"],
-            dest: "js/main.js"
-          }
-        ]
     clean:
       js: ["js/main.js"]
     watch:
       scripts:
         options:
           livereload: true
-        files: ["src/[^#]*.coffee", "static/stylus/*.styl"]
+        files: ["src/[^#]*.js", "static/stylus/*.styl"]
         tasks: ["build"],
 
   ["uglify", "watch", "stylus", "clean"].map (name) ->

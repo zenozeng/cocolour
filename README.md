@@ -72,6 +72,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-06-02 -- 2014-06-08
+
+- New UI Design for colors clustering (in Zeno's loose notes 2014-06-08)
+
 ### 2014-05-12 -- 2014-05-18
 
 - Simple JSON based user system
