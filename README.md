@@ -72,6 +72,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-06-09 -- 2014-06-15
+
+- 关于应用容器化的构想，及相关服务提供商的比较
+
+    Linode + Ubuntu + Docker / DigitalOcean + Ubuntu + Docker / Stackdock / Tutum
+
 ### 2014-06-02 -- 2014-06-08
 
 - New UI Design for colors clustering (in Zeno's loose notes 2014-06-08)
