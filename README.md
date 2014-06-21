@@ -72,6 +72,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-06-16 -- 2014-06-22
+
+- Consider using Web Worker
+
+- New Arch Design (ClojureScript for Pure Calculation & CoffeeScript for UI and Communication)
+
 ### 2014-06-09 -- 2014-06-15
 
 - 关于应用容器化的构想，及相关服务提供商的比较
