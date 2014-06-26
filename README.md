@@ -72,6 +72,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-06-23 -- 2014-06-29
+
+- About whether to use DBaaS or Baas
+
+    See also https://github.com/zenozeng/cocolour/issues/46
+    
+    See also https://github.com/zenozeng/cocolour/issues/44
+    
+- Consider using Genetic Algorithms
+
 ### 2014-06-16 -- 2014-06-22
 
 - Consider using Web Worker
