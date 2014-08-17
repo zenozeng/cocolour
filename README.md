@@ -76,6 +76,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - Go back using CoffeeScript
 
+    See also https://github.com/zenozeng/cocolour/issues/37
+
 ### 2014-06-23 -- 2014-06-29
 
 - About whether to use DBaaS or Baas
