@@ -78,6 +78,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also https://github.com/zenozeng/cocolour/issues/37
 
+- update header, fixes #41
+
+- 聚类算法可视化 (D3)
+
+    https://github.com/zenozeng/colors-clustering-visualization
+
 ### 2014-06-23 -- 2014-06-29
 
 - About whether to use DBaaS or Baas
