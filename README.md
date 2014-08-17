@@ -72,6 +72,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-08-11 -- 2014-08-17
+
+- Go back using CoffeeScript
+
 ### 2014-06-23 -- 2014-06-29
 
 - About whether to use DBaaS or Baas
@@ -81,6 +85,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     See also https://github.com/zenozeng/cocolour/issues/44
     
 - Consider using Genetic Algorithms
+
+    See also https://github.com/zenozeng/cocolour/issues/49
 
 ### 2014-06-16 -- 2014-06-22
 
