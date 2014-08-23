@@ -26,6 +26,7 @@ body.ondrop = (event) ->
     src: url
     minCount: 7
   colorsClustering config, (clusters) ->
+    console.log(JSON.stringify(clusters));
     clusters.sort (a, b) -> b.weight - a.weight
     display clusters
     colorMatchings = []

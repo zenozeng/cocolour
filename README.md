@@ -78,6 +78,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/53
 
+- 界面增加动画
+
+- 尝试引入遗传算法，以便在更短时间获得更好结果
+
+- 构建遗传算法库
+
+    https://github.com/zenozeng/gene-pool
+
 ### 2014-08-11 -- 2014-08-17
 
 - Go back using CoffeeScript
