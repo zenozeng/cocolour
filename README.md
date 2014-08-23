@@ -86,6 +86,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     https://github.com/zenozeng/gene-pool
 
+- Move static/font-awesome to cdn.staticfile.org
+
 ### 2014-08-11 -- 2014-08-17
 
 - Go back using CoffeeScript
