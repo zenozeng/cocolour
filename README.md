@@ -92,6 +92,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     https://cn.avoscloud.com/docs/js_guide.html
 
+- 遗传算法可视化
+
+    http://zenozeng.github.io/gene-pool/demo/
+
 - 引入遗传算法 (gene-pool@0.0.4)
 
 ### 2014-08-11 -- 2014-08-17
