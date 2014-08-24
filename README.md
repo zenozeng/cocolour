@@ -70,6 +70,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Released under the MIT license
 
+- gene-pool
+
+    Copyright (C) 2014 Zeno Zeng
+
+    Released under the MIT license
+
 ## 项目日程
 
 ### 2014-08-18 -- 2014-08-24
