@@ -31,4 +31,4 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-contrib-#{name}"
   grunt.loadNpmTasks "grunt-coffeeify"
 
-  grunt.registerTask "build", ["stylus", "coffeeify", "uglify", "clean"]
+  grunt.registerTask "build", ["stylus", "coffeeify"]

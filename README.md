@@ -88,6 +88,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - Move static/font-awesome to cdn.staticfile.org
 
+- 各家 Baas 服务商的比较，打算使用 avoscloud
+
+    https://cn.avoscloud.com/docs/js_guide.html
+
+- 引入遗传算法 (gene-pool@0.0.4)
+
 ### 2014-08-11 -- 2014-08-17
 
 - Go back using CoffeeScript

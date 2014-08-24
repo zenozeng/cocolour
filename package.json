@@ -2,7 +2,8 @@
   "dependencies": {
     "color-convert": "latest",
     "jquery": ">=2.1.0",
-    "colors-clustering": ">=0.1.1"
+    "colors-clustering": ">=0.1.1",
+    "gene-pool": "latest"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
