@@ -25,6 +25,45 @@ body
   overflow hidden
   padding-bottom 2em
 
+#user
+  float right
+  ul, li
+    list-style none
+    padding 0
+    margin 0
+  li
+    float left
+    margin-left 1em
+    cursor pointer
+  &:after
+    clear both
+    display block
+    content ''
+
+#login, #signup
+  background #fff
+  display none
+  position fixed
+  left 50%
+  top 50%
+  height 100px
+  width 160px
+  margin-left -100px
+  margin-top -70px
+  padding 20px
+  box-shadow 0 0 8px #777
+  input
+    width 100%
+    height 12px
+    margin 5px 0
+  .submit
+    cursor pointer
+    font-size 12px
+    padding 3px 6px
+    margin 6px 0
+    border 1px solid #777
+    display inline-block
+
 #image
   width 100%
   border 1px solid #ccc

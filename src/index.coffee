@@ -1,3 +1,6 @@
+User = require './user.coffee'
+console.log User
+
 if !Array.prototype.map
     window.location.href = "http://browsehappy.com/"
 
@@ -83,3 +86,8 @@ body.ondrop = (event) ->
             setScore $scheme, -1
             $scheme.appendTo($('#schemes'));
 )()
+
+
+# Data
+AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
+user = new User(AV, $)
