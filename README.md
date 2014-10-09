@@ -78,6 +78,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-10-06 -- 2014-10-12
+
+- 引入 AVOS Cloud SDK
+
 ### 2014-08-18 -- 2014-08-24
 
 - 神经网络库的选择讨论
@@ -121,9 +125,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 - About whether to use DBaaS or Baas
 
     See also https://github.com/zenozeng/cocolour/issues/46
-    
+
     See also https://github.com/zenozeng/cocolour/issues/44
-    
+
 - Consider using Genetic Algorithms
 
     See also https://github.com/zenozeng/cocolour/issues/49
