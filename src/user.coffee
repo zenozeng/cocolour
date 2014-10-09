@@ -1,15 +1,20 @@
 class User
 
     constructor: (AV, $) ->
-        @user = null
+        user = @get()
+        console.log user
+        # console.log user
+        $('#user').html user.attributes.username if user?
         @bind AV, $
 
-    get: -> @user
+    get: -> AV.User.current()
 
     bind: (AV, $) ->
         self = @
         $('#login-button').click -> $('#login').toggle()
         $('#signup-button').click -> $('#signup').toggle()
+
+        $('#logout').click -> AV.User.logOut()
 
         $('#signup .submit').click ->
 
@@ -27,7 +32,6 @@ class User
 
             handler =
                 success: (user) ->
-                    self.user = user
                     $('#user').html username
                     $this.parent().hide()
                 error: (user, error) ->
@@ -45,7 +49,6 @@ class User
 
             handler =
                 success: (user) ->
-                    self.user = user
                     $('#user').html username
                     $this.parent().hide()
                 error: (user, error) ->
