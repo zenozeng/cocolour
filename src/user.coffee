@@ -24,6 +24,18 @@ class User
             AV.User.logOut()
             self.html()
 
+        $('#reset-password-button').click -> $('#password-reset').show()
+
+        $('#password-reset .submit').click ->
+            email=$('#password-reset .email').val()
+            $this = $(this)
+            handler =
+                success: ->
+                    $this.parent().hide()
+                error: (error) ->
+                    alert("Error: " + error.code + " " + error.message);
+            AV.User.requestPasswordReset email, handler
+
         $('#signup .submit').click ->
 
             user = new AV.User()
