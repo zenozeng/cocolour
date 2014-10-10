@@ -13,19 +13,39 @@ class SchemesView
             $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
 
             colors = $scheme.data('scheme')
+            length = colors.length
+            colors = JSON.stringify(colors)
+            user = AV.User.current()
 
-            Scheme = AV.Object.extend("Scheme")
-            scheme = new Scheme()
+            if user
+                username =  user.attributes.username
 
-            scheme.set 'colors', colors
-            scheme.set 'length', colors.length
-            scheme.set 'score', score
-            username = AV.User.current() && AV.User.current().attributes.username
-            scheme.set 'creator', username
-            ACL = new AV.ACL(AV.User.current())
-            ACL.setPublicReadAccess(true)
-            scheme.setACL(ACL)
-            scheme.save()
+                Scheme = AV.Object.extend("Scheme")
+
+                query = new AV.Query(Scheme)
+                query.equalTo("colors", colors)
+                query.equalTo("owner", username)
+                query.find({
+                    success: (record) ->
+                        if record.length is 0
+                            scheme = new Scheme()
+
+                            scheme.set 'colors', colors
+                            scheme.set 'length', length
+                            scheme.set 'score', score
+
+                            scheme.set 'owner', username
+                            ACL = new AV.ACL(AV.User.current())
+                            ACL.setPublicReadAccess(true)
+                            scheme.setACL(ACL)
+                            scheme.save()
+                        else
+                            # already exits, update it
+                            scheme = record[0]
+                            scheme.set 'score', score
+                            scheme.save()
+                })
+
 
         $('body').on 'click', '.scheme .fa-heart-o', ->
             $scheme = $(this).parents('.scheme')
