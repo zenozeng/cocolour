@@ -1,19 +1,17 @@
-class User
+class UserView
 
     constructor: (AV, @$) ->
         @html()
         @bind AV, @$
 
     html: ->
-        user = @get()
+        user = AV.User.current()
         if user?
             html = "<li>" + user.attributes.username + "</li>"
             html += '<li id="logout">Logout</li>'
         else
             html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
         @$('#user').html "<ul>" + html + "</ul>"
-
-    get: -> AV.User.current()
 
     bind: (AV, $) ->
         self = @
@@ -76,4 +74,4 @@ class User
             AV.User.logIn username, password, handler
 
 
-module.exports = User
+module.exports = UserView
