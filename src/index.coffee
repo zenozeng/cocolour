@@ -16,9 +16,8 @@ display = (clusters) ->
 # Data
 AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
 
-new (require './user-view.coffee')(AV, $)
 schemesView = new (require './schemes-view.coffee')(AV, $)
-
+new (require './user-view.coffee')(AV, $, schemesView)
 
 body = document.body
 body.ondragover = (event) -> event.preventDefault()
@@ -47,8 +46,7 @@ body.ondrop = (event) ->
         colorSchemes = new GenePool(opts)
         colorSchemes.timeout 800, (err, schemes) ->
             console.error(err) if err
-            html = schemes.map (colors) -> schemesView.generate(colors)
-            $("#schemes").html html.join('')
+            $("#schemes").html schemesView.generate(schemes)
     img = new Image
     img.onload = ->
         box.style.lineHeight = 0

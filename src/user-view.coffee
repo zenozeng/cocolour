@@ -1,19 +1,20 @@
 class UserView
 
-    constructor: (AV, @$) ->
+    constructor: (AV, @$, schemesView) ->
         @html()
-        @bind AV, @$
+        @bind AV, @$, schemesView
 
     html: ->
         user = AV.User.current()
         if user?
             html = "<li>" + user.attributes.username + "</li>"
+            html += '<li id="my-colors">My Colors</li>'
             html += '<li id="logout">Logout</li>'
         else
             html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
         @$('#user').html "<ul>" + html + "</ul>"
 
-    bind: (AV, $) ->
+    bind: (AV, $, schemesView) ->
         self = @
         $('#user').on 'click', '#login-button', -> $('#login').toggle()
         $('#user').on 'click', '#signup-button', -> $('#signup').toggle()
@@ -23,6 +24,25 @@ class UserView
             self.html()
 
         $('#reset-password-button').click -> $('#password-reset').show()
+
+        $('#my-colors').click ->
+            user = AV.User.current()
+            if user
+                username = user.attributes.username
+                Scheme = AV.Object.extend("Scheme")
+                query = new AV.Query(Scheme)
+                query.equalTo("owner", username)
+                query.equalTo("score", 1)
+                query.find {
+                    success: (schemes) ->
+                        schemes = schemes.map (scheme) ->
+                            JSON.parse scheme.attributes.colors
+                        html = schemesView.generate schemes
+                        $('#schemes').html html
+                        $('#image').remove()
+                        $('#colors').remove()
+                        $('#main').css 'float', 'none'
+                }
 
         $('#password-reset .submit').click ->
             email=$('#password-reset .email').val()

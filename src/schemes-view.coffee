@@ -3,7 +3,11 @@ class SchemesView
     constructor: (AV, $) ->
         @bind AV, $
 
-    generate: (colors) ->
+    generate: (schemes) ->
+        html = schemes.map (colors) => @generateScheme(colors)
+        html.join ''
+
+    generateScheme: (colors) ->
         # sort colors
         colors.sort (a, b) ->
             a.some (elem, index) -> elem > b[index]
@@ -26,6 +30,8 @@ class SchemesView
             $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
 
             colors = $scheme.data('scheme')
+            colors.sort (a, b) ->
+                a.some (elem, index) -> elem > b[index]
             length = colors.length
             colors = JSON.stringify(colors)
             user = AV.User.current()
