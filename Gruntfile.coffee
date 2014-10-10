@@ -14,7 +14,7 @@ module.exports = (grunt) ->
       main:
         files: [
           {
-            src: ["src/index.coffee", "src/user.coffee"],
+            src: ["src/index.coffee"],
             dest: "js/main.js"
           }
         ]

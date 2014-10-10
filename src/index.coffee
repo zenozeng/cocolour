@@ -57,6 +57,11 @@ body.ondrop = (event) ->
     img.src = url
 
 
+# Data
+AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
+user = new User(AV, $)
+
+
 # bind events
 (->
     getScore = ($scheme) ->
@@ -69,6 +74,13 @@ body.ondrop = (event) ->
     setScore = ($scheme, score) ->
         $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
         $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
+
+        Scheme = AV.Object.extend("Scheme")
+        scheme = new Scheme
+        ACL = new AV.ACL(AV.User.current())
+        ACL.setPublicReadAccess(true)
+        scheme.setACL(ACL)
+        scheme.save()
 
     $('#schemes').on 'click', '.scheme .fa-heart-o', ->
         $scheme = $(this).parents('.scheme')
@@ -87,6 +99,3 @@ body.ondrop = (event) ->
 )()
 
 
-# Data
-AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
-user = new User(AV, $)
