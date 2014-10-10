@@ -84,6 +84,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - user.signup, user.login, user.logout & user.passwordReset
 
+- DB: Class Scheme
+
+- ACL for Scheme
+
 ### 2014-08-18 -- 2014-08-24
 
 - 神经网络库的选择讨论

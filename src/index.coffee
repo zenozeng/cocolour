@@ -41,7 +41,6 @@ body.ondrop = (event) ->
             fitness: fitness
         colorSchemes = new GenePool(opts)
         colorSchemes.timeout 800, (err, schemes) ->
-            console.log schemes
             console.error(err) if err
             html = schemes.map (colors) ->
                 tmp = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
@@ -75,8 +74,16 @@ user = new User(AV, $)
         $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
         $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
 
+        colors = $scheme.data('scheme')
+
         Scheme = AV.Object.extend("Scheme")
-        scheme = new Scheme
+        scheme = new Scheme()
+
+        scheme.set 'colors', colors
+        scheme.set 'length', colors.length
+        scheme.set 'score', score
+        username = AV.User.current() && AV.User.current().attributes.username
+        scheme.set 'creator', username
         ACL = new AV.ACL(AV.User.current())
         ACL.setPublicReadAccess(true)
         scheme.setACL(ACL)
