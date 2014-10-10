@@ -1,11 +1,17 @@
 class User
 
-    constructor: (AV, $) ->
+    constructor: (AV, @$) ->
+        @html()
+        @bind AV, @$
+
+    html: ->
         user = @get()
-        console.log user
-        # console.log user
-        $('#user').html user.attributes.username if user?
-        @bind AV, $
+        if user?
+            html = "<li>" + user.attributes.username + "</li>"
+            html += '<li id="logout">Logout</li>'
+        else
+            html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
+        @$('#user').html "<ul>" + html + "</ul>"
 
     get: -> AV.User.current()
 
@@ -14,7 +20,9 @@ class User
         $('#login-button').click -> $('#login').toggle()
         $('#signup-button').click -> $('#signup').toggle()
 
-        $('#logout').click -> AV.User.logOut()
+        $('#logout').click ->
+            AV.User.logOut()
+            self.html()
 
         $('#signup .submit').click ->
 
@@ -32,7 +40,7 @@ class User
 
             handler =
                 success: (user) ->
-                    $('#user').html username
+                    self.html()
                     $this.parent().hide()
                 error: (user, error) ->
                     alert("Error: " + error.code + " " + error.message);
@@ -49,7 +57,7 @@ class User
 
             handler =
                 success: (user) ->
-                    $('#user').html username
+                    self.html()
                     $this.parent().hide()
                 error: (user, error) ->
                     alert("Error: " + error.code + " " + error.message);
