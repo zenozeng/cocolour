@@ -82,6 +82,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 引入 AVOS Cloud SDK
 
+- user.signup & user.login & user.logout
+
 ### 2014-08-18 -- 2014-08-24
 
 - 神经网络库的选择讨论

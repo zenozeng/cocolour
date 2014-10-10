@@ -17,10 +17,10 @@ class User
 
     bind: (AV, $) ->
         self = @
-        $('#login-button').click -> $('#login').toggle()
-        $('#signup-button').click -> $('#signup').toggle()
+        $('#user').on 'click', '#login-button', -> $('#login').toggle()
+        $('#user').on 'click', '#signup-button', -> $('#signup').toggle()
 
-        $('#logout').click ->
+        $('#user').on 'click', '#logout', ->
             AV.User.logOut()
             self.html()
 
