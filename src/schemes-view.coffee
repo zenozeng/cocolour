@@ -1,6 +1,16 @@
 class SchemesView
 
     constructor: (AV, $) ->
+        @bind AV, $
+
+    generate: (colors) ->
+        tmp = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
+        "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>#{tmp.join('')}
+            <i class='fa fa-heart-o button'></i>
+            <i class='fa fa-trash-o button'></i></div>"
+
+
+    bind: (AV, $) ->
         getScore = ($scheme) ->
             if $scheme.find('.fa-heart-o').hasClass 'selected'
                 1

@@ -1,4 +1,3 @@
-
 if !Array.prototype.map
     window.location.href = "http://browsehappy.com/"
 
@@ -13,6 +12,13 @@ display = (clusters) ->
         "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
     html = "<div class='colors'>#{html.join('')}</div>"
     document.getElementById("colors").innerHTML = html
+
+# Data
+AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
+
+new (require './user-view.coffee')(AV, $)
+schemesView = new (require './schemes-view.coffee')(AV, $)
+
 
 body = document.body
 body.ondragover = (event) -> event.preventDefault()
@@ -41,11 +47,7 @@ body.ondrop = (event) ->
         colorSchemes = new GenePool(opts)
         colorSchemes.timeout 800, (err, schemes) ->
             console.error(err) if err
-            html = schemes.map (colors) ->
-                tmp = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
-                "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>#{tmp.join('')}
-                    <i class='fa fa-heart-o button'></i>
-                    <i class='fa fa-trash-o button'></i></div>"
+            html = schemes.map (colors) -> schemesView.generate(colors)
             $("#schemes").html html.join('')
     img = new Image
     img.onload = ->
@@ -54,10 +56,4 @@ body.ondrop = (event) ->
         box.appendChild img
     img.src = url
 
-
-# Data
-AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
-
-new (require './user-view.coffee')(AV, $)
-new (require './schemes-view.coffee')(AV, $)
 

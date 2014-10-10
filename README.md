@@ -88,6 +88,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - ACL for Scheme
 
+- Log heart and trash
+
 ### 2014-08-18 -- 2014-08-24
 
 - 神经网络库的选择讨论
