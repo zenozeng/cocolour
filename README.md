@@ -44,6 +44,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Released under the MIT license
 
+- color-convert
+
+    Copyright (c) 2011 Heather Arthur <fayearthur@gmail.com>
+
+    Released under the MIT license
+
 - colors-clustering
 
     Copyright (C) 2014 Zeno Zeng
