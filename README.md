@@ -78,6 +78,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-10-13 -- 2014-10-19
+
+- Fix bugs in UI
+
+- Script for fetching all color schemes in database
+
 ### 2014-10-06 -- 2014-10-12
 
 - 引入 AVOS Cloud SDK
