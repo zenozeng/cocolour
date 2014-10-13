@@ -25,7 +25,7 @@ class UserView
 
         $('#reset-password-button').click -> $('#password-reset').show()
 
-        $('#my-colors').click ->
+        $('#user').on 'click', '#my-colors', ->
             user = AV.User.current()
             if user
                 username = user.attributes.username
