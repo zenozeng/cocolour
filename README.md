@@ -2,20 +2,6 @@
 
 Color schemes generator based on machine learning
 
-## Intro
-
-### Clustering
-
-#### Resize
-
-based on `maxWidth` and `maxHeight`
-
-#### RGB 2 Lab
-
-#### k-means algorithm & CIE76
-
-### [TODO] Machine Learning
-
 ## Development
 
 ```
@@ -30,12 +16,6 @@ npm install
 ### Watch
 
 `grunt watch`
-
-## Production
-
-```
-npm install --production
-```
 
 ## License
 
