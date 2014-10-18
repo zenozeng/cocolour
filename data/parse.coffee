@@ -5,7 +5,7 @@ converter = require("color-convert")()
 data = fs.readFileSync 'data.json'
 data = JSON.parse data
 
-console.log data
+data.sort (a, b) -> (new Date(a.createdAt)) - (new Date(b.createdAt))
 
 parse = (colors) ->
     colors.map (color) ->
@@ -20,11 +20,13 @@ parse = (colors) ->
                 elem /= 100
             parseFloat elem.toFixed(3)
 
-good = data.filter (elem) -> elem.score > 0
-good = good.map (elem) -> parse(elem.colors)
+likes = data.filter (elem) -> elem.score > 0
+likes = data.filter (elem, index) -> index < 150
+likes = likes.map (elem) -> parse(elem.colors)
 
-bad = data.filter (elem) -> elem.score < 0
-bad = bad.map (elem) -> parse(elem.colors)
+dislikes = data.filter (elem) -> elem.score < 0
+dislikes = dislikes.filter (elem, index) -> index < 150
+dislikes = dislikes.map (elem) -> parse(elem.colors)
 
-console.log 'good', good.length
-console.log 'bad', bad.length
+console.log 'Likes', likes.length
+console.log 'Dislikes', dislikes.length
