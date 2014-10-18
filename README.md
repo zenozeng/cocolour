@@ -70,6 +70,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - Script for fetching all color schemes in database
 
+- 500+ more color schemes
+
 ### 2014-10-06 -- 2014-10-12
 
 - 引入 AVOS Cloud SDK
