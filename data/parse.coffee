@@ -6,13 +6,24 @@ data = JSON.parse data
 
 parse = (colors) ->
     colors.map (color) ->
+        # convert rgb to hsl
         hsl = converter.rgb(color).hsl()
-        color =
-            h: hsl[0]
-            s: hsl[1]
-            l: hsl[2]
+
+        # normalize hsl to [0, 1]
+        hsl.map (elem, index) ->
+            if index is 0
+                elem /= 360
+            else
+                elem /= 100
+            parseFloat elem.toFixed(3)
 
 good = data.filter (elem) -> elem.score > 0
 good = good.map (elem) -> parse(elem.colors)
 
-console.log JSON.stringify(good, null, 4)
+beautify = (obj) ->
+    str = JSON.stringify(obj)
+    str = str.replace(new RegExp('\\[', 'g'), '\n')
+    str = str.replace(new RegExp('[\\],]', 'g'), ' ')
+
+console.log beautify(good)
+

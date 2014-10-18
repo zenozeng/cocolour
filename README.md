@@ -72,6 +72,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 500+ more color schemes
 
+- Normalize colors
+
 ### 2014-10-06 -- 2014-10-12
 
 - 引入 AVOS Cloud SDK
