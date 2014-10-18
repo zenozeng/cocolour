@@ -1,8 +1,11 @@
 fs = require 'fs'
-converter = require("color-convert")();
+converter = require("color-convert")()
+{print} = require './helper.coffee'
 
 data = fs.readFileSync 'data.json'
 data = JSON.parse data
+
+console.log data
 
 parse = (colors) ->
     colors.map (color) ->
@@ -20,10 +23,8 @@ parse = (colors) ->
 good = data.filter (elem) -> elem.score > 0
 good = good.map (elem) -> parse(elem.colors)
 
-beautify = (obj) ->
-    str = JSON.stringify(obj)
-    str = str.replace(new RegExp('\\[', 'g'), '\n')
-    str = str.replace(new RegExp('[\\],]', 'g'), ' ')
+bad = data.filter (elem) -> elem.score < 0
+bad = bad.map (elem) -> parse(elem.colors)
 
-console.log beautify(good)
-
+console.log 'good', good.length
+console.log 'bad', bad.length

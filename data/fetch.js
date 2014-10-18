@@ -5,7 +5,10 @@ query.limit(1000).find({
     success: function(data) {
         data = data.map(function(elem) {
             elem.attributes.colors = JSON.parse(elem.attributes.colors);
-            return elem.attributes;
+            var obj = elem.attributes;
+            obj.createdAt = elem.createdAt;
+            obj.updatedAt = elem.updatedAt;
+            return obj;
         });
         data = JSON.stringify(data);
         window.location.href = "data:application/json;charset=UTF-8," + data;
