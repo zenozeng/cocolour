@@ -83,6 +83,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     具体的测试详情：https://github.com/zenozeng/cocolour/issues/76
 
+- 确定输出格式
+
+    似乎喜欢和讨厌的机制是很不一样的，
+    所以他们应该被丢到两个堆中去。
+
+    如果直接用单个score输出，正确率非常低，只有三十几。
+    如果用 [喜欢，不喜欢，一般] 输出，大概61%
+    如果用 [喜欢, 不喜欢]，大概68%
+
+    具体的测试详情：https://github.com/zenozeng/cocolour/issues/77
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI
