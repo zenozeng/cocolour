@@ -72,6 +72,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/72
 
+- 一次概念验证性测试
+
+    ```
+    Length:  400
+    Match Cound:  367
+    Unmatch Cound:  33
+    Rate(%):  91.75
+    ```
+
+    具体的测试详情：https://github.com/zenozeng/cocolour/issues/76
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI

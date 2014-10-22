@@ -1,6 +1,5 @@
 fs = require 'fs'
 converter = require("color-convert")()
-{print} = require './helper.coffee'
 brain = require 'brain'
 _ = require 'lodash'
 
