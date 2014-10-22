@@ -7,7 +7,7 @@ _ = require 'lodash'
 data = fs.readFileSync '../data/training.json'
 data = JSON.parse data
 
-parse = (colors) ->
+normalize = (colors) ->
 
     colors.map (color) ->
         # convert rgb to hsl
@@ -22,19 +22,45 @@ parse = (colors) ->
             parseFloat elem.toFixed(3)
 
 likes = data.filter (elem) -> elem.score > 0
-likes = likes.map (elem) -> parse(elem.colors)
+likes = likes.map (elem) -> normalize(elem.colors)
 
 dislikes = data.filter (elem) -> elem.score < 0
-dislikes = dislikes.map (elem) -> parse(elem.colors)
-
-console.log 'Likes', likes.length
-console.log 'Dislikes', dislikes.length
+dislikes = dislikes.map (elem) -> normalize(elem.colors)
 
 # train
 net = new brain.NeuralNetwork()
 
-net.train likes.map (elem) -> {input: _.flatten(elem), output: {like: 1}}
-net.train dislikes.map (elem) -> {input: _.flatten(elem), output: {dislike: 1}}
+opts =
+    errorThresh: 0.005 # error threshold to reach
+    iterations: 20000 # max training iterations
+    log: true
+    logPeriod: 10
+    learningRate: 0.3
 
-json = net.toJSON()
-print json
+train = (hslMatrixArray, output) ->
+    schemeVerctorArray = hslMatrixArray.map (hslMatrix) -> _.flatten hslMatrix
+    data = schemeVerctorArray.map (vector) ->
+        input: vector
+        output: output
+    net.train data, opts
+
+verify = (hslMatrix, expectation) ->
+    output = net.toFunction()(_.flatten(hslMatrix))
+    console.log "Exp: ", expectation
+    console.log "Output: ", output
+
+train likes, {like: 1}
+train dislikes, {dislike: 1}
+
+verifyData = fs.readFileSync '../data/training.json'
+verifyData = JSON.parse verifyData
+getType = (score) ->
+    if score > 0
+        "like"
+    else
+        if score < 0
+            "dislike"
+        else
+            "normal"
+verifyData.forEach  (elem) ->
+    verify normalize(elem.colors), getType(elem.score)
