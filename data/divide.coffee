@@ -5,6 +5,8 @@ data = JSON.parse data
 
 data.sort (a, b) -> (new Date(a.createdAt)) - (new Date(b.createdAt))
 
+data = data.filter (elem) -> elem.score != 0
+
 training = data.filter (elem, index) -> index < 400
 test = data.filter (elem, index) -> index >= 400
 

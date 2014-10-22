@@ -18,7 +18,7 @@ class ANN
         defaults =
             errorThresh: 0.005 # error threshold to reach
             iterations: 20000 # max training iterations
-            log: true
+            log: false
             logPeriod: 10
             learningRate: 0.3
 
@@ -45,7 +45,7 @@ class ANN
 
             hslVector = _.flatten(hslMatrix)
 
-            {input: hslVector, output: {score: scheme.score}}
+            {input: hslVector, output: if scheme.score > 0 then {positive: 1} else {negative: 1}}
 
     # Train data
     #
@@ -63,10 +63,11 @@ class ANN
     verify: (data) ->
         tests = data.map (scheme) =>
             rate = @rate scheme
-            match = scheme.score == rate
+            expectation = if scheme.score > 0 then "positive" else "negative"
+            match = expectation == rate
             console.log ""
             console.log "Rate: ", rate
-            console.log "Expectation: ", scheme.score
+            console.log "Expectation: ", expectation
             console.log "Match?: ", match
             match
         console.log ""
@@ -81,16 +82,8 @@ class ANN
     #
     rate: (scheme) ->
         [{input}] = @preprocess [scheme]
-        {score} = @fn input
-        if @options.log
-            console.log "Scheme: ", scheme
-            console.log "Score: ", score
-        if score > 0.01
-            1
-        else
-            if score < 0
-                -1
-            else
-                0
+        pairs = _.pairs @fn(input)
+        pairs.sort (a, b) -> b[1] - a[1]
+        pairs[0][0]
 
 module.exports = ANN
