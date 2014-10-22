@@ -37,20 +37,21 @@ opts =
     logPeriod: 10
     learningRate: 0.3
 
-train = (hslMatrixArray, output) ->
-    schemeVerctorArray = hslMatrixArray.map (hslMatrix) -> _.flatten hslMatrix
-    data = schemeVerctorArray.map (vector) ->
-        input: vector
-        output: output
-    net.train data, opts
-
 verify = (hslMatrix, expectation) ->
     output = net.toFunction()(_.flatten(hslMatrix))
     console.log "Exp: ", expectation
     console.log "Output: ", output
 
-train likes, {like: 1}
-train dislikes, {dislike: 1}
+trainData = likes.map (elem) -> {input: _.flatten(elem), output: {like: 1}}
+trainData = trainData.concat dislikes.map (elem) -> {input: _.flatten(elem), output: {dislike: 1}}
+
+net.train trainData, opts
+
+display = ->
+    json = net.toJSON()
+    console.log JSON.stringify(json, null, 4)
+
+display()
 
 verifyData = fs.readFileSync '../data/training.json'
 verifyData = JSON.parse verifyData

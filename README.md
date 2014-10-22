@@ -64,6 +64,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2014-10-20 -- 2014-11-09
+
+- 确定输入格式为一个 HSL 矩阵的 flatten: H1 S1 L1 H2 S2 L2 H3 S3 L3 H4 S4 L4 H5 S5 L5
+
+    See also: https://github.com/zenozeng/cocolour/issues/72
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI
