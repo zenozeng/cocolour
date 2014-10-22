@@ -37,10 +37,16 @@ opts =
     logPeriod: 10
     learningRate: 0.3
 
-verify = (hslMatrix, expectation) ->
+verifyElem = (hslMatrix, expectation) ->
     output = net.toFunction()(_.flatten(hslMatrix))
-    console.log "Exp: ", expectation
+    guess = if output.like > output.dislike then "like" else "dislike"
+    match = guess == expectation
+    console.log ""
     console.log "Output: ", output
+    console.log "Guess: ", guess
+    console.log "Exp: ", expectation
+    console.log "Match?: ", match
+    match
 
 trainData = likes.map (elem) -> {input: _.flatten(elem), output: {like: 1}}
 trainData = trainData.concat dislikes.map (elem) -> {input: _.flatten(elem), output: {dislike: 1}}
@@ -63,5 +69,10 @@ getType = (score) ->
             "dislike"
         else
             "normal"
-verifyData.forEach  (elem) ->
-    verify normalize(elem.colors), getType(elem.score)
+
+verifyTests = verifyData.map (elem) -> verifyElem normalize(elem.colors), getType(elem.score)
+
+console.log "Length: ", verifyTests.length
+console.log "Match Cound: ", (verifyTests.filter (elem) -> elem).length
+console.log "Unmatch Cound: ", (verifyTests.filter (elem) -> !elem).length
+console.log "Rate(%): ", (verifyTests.filter (elem) -> elem).length / verifyTests.length * 100
