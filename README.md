@@ -75,10 +75,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 - 一次概念验证性测试
 
     ```
-    Length:  400
-    Match Cound:  367
-    Unmatch Cound:  33
-    Rate(%):  91.75
+    Length:  164
+    Match Cound:  106
+    Unmatch Cound:  58
+    Rate(%):  64.63414634146342
     ```
 
     具体的测试详情：https://github.com/zenozeng/cocolour/issues/76
