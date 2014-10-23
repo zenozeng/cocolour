@@ -1,6 +1,7 @@
 converter = require("color-convert")()
 brain = require 'brain'
 _ = require 'lodash'
+math = require 'mathjs'
 
 # Simple wrapper of brain for color schemes
 #
@@ -18,7 +19,7 @@ class ANN
         defaults =
             errorThresh: 0.005 # error threshold to reach
             iterations: 20000 # max training iterations
-            log: false
+            log: true
             logPeriod: 10
             learningRate: 0.3
 
@@ -43,9 +44,16 @@ class ANN
                         elem /= 100
                     parseFloat elem.toFixed(3)
 
-            hslVector = _.flatten(hslMatrix)
+            input = _.flatten(hslMatrix)
 
-            {input: hslVector, output: if scheme.score > 0 then {positive: 1} else {negative: 1}}
+            # 方差
+            # hVar = math.var (hslMatrix.map (hsl) -> hsl[0])
+            # sVar = math.var (hslMatrix.map (hsl) -> hsl[1])
+            # vVar = math.var (hslMatrix.map (hsl) -> hsl[2])
+
+            # input = input.concat(hVar, sVar, vVar)
+
+            {input: input, output: if scheme.score > 0 then {positive: 1} else {negative: 1}}
 
     # Train data
     #
@@ -70,10 +78,13 @@ class ANN
             console.log "Expectation: ", expectation
             console.log "Match?: ", match
             match
+        passed = (tests.filter (elem) -> elem).length
+        rate = passed / tests.length
         console.log ""
         console.log "Tests: ", tests.length
-        console.log "Passed Tests: ", (tests.filter (elem) -> elem).length
-        console.log "Rate(%): ", (tests.filter (elem) -> elem).length / tests.length
+        console.log "Passed Tests: ", passed
+        console.log "Rate(%): ", rate
+        {length: tests.length, passed: passed, rate: rate}
 
     # Rate given scheme
     #
