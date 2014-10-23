@@ -20,7 +20,7 @@ class ANN
             errorThresh: 0.005 # error threshold to reach
             iterations: 30000 # max training iterations
             log: true
-            logPeriod: 20
+            logPeriod: 10
             learningRate: 0.3
 
         @options = _.defaults options, defaults

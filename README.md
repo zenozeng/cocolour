@@ -103,8 +103,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 增加数据到 813 组
 
-    预测正确率明显提升了一些，
-    测了几次，一次 0.70，一次 0.76，一次　0.67，一次 0.71
+- 数据分组成 train 和 verify 组的时候引入随机性
+
+    https://github.com/zenozeng/cocolour/issues/81
+
+    这个 Issue 会导致之前的测定结果存在一定的偏差
+
+- 增加数据到 1378 组
 
 ### 2014-10-13 -- 2014-10-19
 

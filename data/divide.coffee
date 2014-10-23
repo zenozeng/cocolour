@@ -7,10 +7,10 @@ data.sort (a, b) -> Math.random() > 0.5
 
 data = data.filter (elem) -> elem.score != 0
 
-n = 700
+n = 1100
 
 training = data.filter (elem, index) -> index < n
-test = data.filter (elem, index) -> index >= n && index <= 900
+test = data.filter (elem, index) -> index >= n
 
 console.log 'training.json', training.length
 console.log 'verify.json', test.length
