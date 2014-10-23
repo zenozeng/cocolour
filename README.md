@@ -97,6 +97,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 增加数据到 813 组
 
+    预测正确率明显提升了一些，
+    测了几次次，一次 0.70，一次 0.76，一次　0.67，一次 0.71
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI

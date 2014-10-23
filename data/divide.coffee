@@ -7,8 +7,10 @@ data.sort (a, b) -> (new Date(a.createdAt)) - (new Date(b.createdAt))
 
 data = data.filter (elem) -> elem.score != 0
 
-training = data.filter (elem, index) -> index < 400
-test = data.filter (elem, index) -> index >= 400
+n = 700
+
+training = data.filter (elem, index) -> index < n
+test = data.filter (elem, index) -> index >= n
 
 console.log 'training.json', training.length
 console.log 'verify.json', test.length
