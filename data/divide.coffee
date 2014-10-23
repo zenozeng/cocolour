@@ -3,14 +3,14 @@ fs = require 'fs'
 data = fs.readFileSync 'all.json'
 data = JSON.parse data
 
-data.sort (a, b) -> (new Date(a.createdAt)) - (new Date(b.createdAt))
+data.sort (a, b) -> Math.random() > 0.5
 
 data = data.filter (elem) -> elem.score != 0
 
 n = 700
 
 training = data.filter (elem, index) -> index < n
-test = data.filter (elem, index) -> index >= n
+test = data.filter (elem, index) -> index >= n && index <= 900
 
 console.log 'training.json', training.length
 console.log 'verify.json', test.length
