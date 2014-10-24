@@ -18,10 +18,10 @@ class ANN
 
         defaults =
             errorThresh: 0.005 # error threshold to reach
-            iterations: 30000 # max training iterations
+            iterations: 20000 # max training iterations
             log: true
             logPeriod: 10
-            learningRate: 0.3
+            learningRate: 0.1
 
         @options = _.defaults options, defaults
         @net = new brain.NeuralNetwork()

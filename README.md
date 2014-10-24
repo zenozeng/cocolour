@@ -111,6 +111,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 增加数据到 1378 组
 
+- 调整 learningRate 到 0.1
+
+    似乎结果的稳定性提升了一些、正确率也提升了一些
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI
