@@ -7,6 +7,6 @@ data = JSON.parse data
 verifyData = fs.readFileSync '../../data/verify.json'
 verifyData = JSON.parse verifyData
 
-ann = new ANN
+ann = new ANN {logPeriod: 1000}
 ann.train data
 ann.verify verifyData

@@ -4,7 +4,7 @@ fs = require 'fs'
 cpus = require('os').cpus().map (cpu) -> cpu.model
 console.log cpus
 
-N = 12
+N = 8 * 8
 lunched = 0
 done = 0
 

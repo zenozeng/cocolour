@@ -153,6 +153,100 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     { tests: 2904, passed: 1927, rate: 0.6635674931129476 }
     ```
 
+
+- 调整学习速率到 0.05
+
+    ```javascript
+    [ { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 165, rate: 0.6818181818181818 },
+      { tests: 242, passed: 145, rate: 0.5991735537190083 },
+      { tests: 242, passed: 153, rate: 0.6322314049586777 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 146, rate: 0.6033057851239669 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 } ]
+      { tests: 2904, passed: 1873, rate: 0.6449724517906336 }
+    ```
+
+    ```javascript
+    // SLAVE#64 closed
+    [ { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 },
+      { tests: 242, passed: 166, rate: 0.6859504132231405 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 163, rate: 0.6735537190082644 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 141, rate: 0.5826446280991735 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 146, rate: 0.6033057851239669 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 153, rate: 0.6322314049586777 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 155, rate: 0.640495867768595 },
+      { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 152, rate: 0.628099173553719 },
+      { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 152, rate: 0.628099173553719 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 },
+      { tests: 242, passed: 149, rate: 0.6157024793388429 },
+      { tests: 242, passed: 163, rate: 0.6735537190082644 },
+      { tests: 242, passed: 155, rate: 0.640495867768595 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 166, rate: 0.6859504132231405 },
+      { tests: 242, passed: 153, rate: 0.6322314049586777 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 161, rate: 0.6652892561983471 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 146, rate: 0.6033057851239669 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 150, rate: 0.6198347107438017 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 161, rate: 0.6652892561983471 },
+      { tests: 242, passed: 155, rate: 0.640495867768595 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 167, rate: 0.6900826446280992 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 161, rate: 0.6652892561983471 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 155, rate: 0.640495867768595 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 } ]
+    { tests: 15488, passed: 9983, rate: 0.6445635330578512 }
+    ```
+
+- [TODO] Verify 的断点续跑
+
+- [TODO] Verify 时间记录
+
+- [TODO] Verify 中途查看结果
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI
