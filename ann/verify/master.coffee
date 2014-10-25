@@ -37,4 +37,11 @@ callback = (logs) ->
         rate: parseFloat log.match(/Rate\(%\): *(.*)\n/)[1]
     console.log logs
 
+    tests = 0
+    passed = 0
+    logs.forEach (log) ->
+        tests += log.tests
+        passed += log.passed
+    console.log {tests: tests, passed: passed, rate: passed / tests}
+
 cpus.forEach -> fork()

@@ -115,6 +115,44 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     似乎结果的稳定性提升了一些、正确率也提升了一些
 
+- 基于 master-slave 的多进程结果验证
+
+    充分利用多核性能
+
+- 尝试引入色相方差、饱和度方差、明度方差
+
+    ```javascript
+    [ { tests: 242, passed: 153, rate: 0.6322314049586777 },
+      { tests: 242, passed: 165, rate: 0.6818181818181818 },
+      { tests: 242, passed: 140, rate: 0.5785123966942148 },
+      { tests: 242, passed: 168, rate: 0.6942148760330579 },
+      { tests: 242, passed: 162, rate: 0.6694214876033058 },
+      { tests: 242, passed: 161, rate: 0.6652892561983471 },
+      { tests: 242, passed: 147, rate: 0.6074380165289256 },
+      { tests: 242, passed: 155, rate: 0.640495867768595 },
+      { tests: 242, passed: 166, rate: 0.6859504132231405 },
+      { tests: 242, passed: 163, rate: 0.6735537190082644 },
+      { tests: 242, passed: 156, rate: 0.6446280991735537 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 } ]
+    { tests: 2904, passed: 1893, rate: 0.6518595041322314 }
+    ```
+
+    ```javascript
+    [ { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 157, rate: 0.6487603305785123 },
+      { tests: 242, passed: 151, rate: 0.6239669421487604 },
+      { tests: 242, passed: 159, rate: 0.6570247933884298 },
+      { tests: 242, passed: 163, rate: 0.6735537190082644 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 171, rate: 0.7066115702479339 },
+      { tests: 242, passed: 154, rate: 0.6363636363636364 },
+      { tests: 242, passed: 158, rate: 0.6528925619834711 },
+      { tests: 242, passed: 160, rate: 0.6611570247933884 },
+      { tests: 242, passed: 170, rate: 0.7024793388429752 },
+      { tests: 242, passed: 167, rate: 0.6900826446280992 } ]
+    { tests: 2904, passed: 1927, rate: 0.6635674931129476 }
+    ```
+
 ### 2014-10-13 -- 2014-10-19
 
 - Fix bugs in UI
