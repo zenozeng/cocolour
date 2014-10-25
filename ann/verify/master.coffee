@@ -2,6 +2,7 @@ spawn = require('child_process').spawn
 fs = require 'fs'
 
 cpus = require('os').cpus().map (cpu) -> cpu.model
+cpus = cpus.filter (cpu, index) -> index % 2 is 0
 console.log cpus
 
 N = 8 * 8
