@@ -64,6 +64,20 @@ class ANN
         @net.train @preprocess(data), @options
         @fn = @net.toFunction()
 
+
+    # Train Pattern
+    #
+    # @note 这个 pattern 训练的时候原先的数据已经不可以被访问到，
+    # 　　　 所以这个时候的神经网络如果直接训练的话，会和原先的数据失去拟合
+    # 　　　 但是某种程度上，这个是个 feature，因为用户后天数据权重比较大
+    #
+    # @todo 小心和要训练的数据产生过拟合
+    #
+    trainPattern: (pat) ->
+        maxLoop = 100
+        [0...maxLoop].forEach =>
+            @net.trainPattern(pat)
+
     # Verify data
     #
     # @param [Array] data cocolour style data [{rgbColors, score}]

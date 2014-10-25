@@ -8,7 +8,15 @@ N = 8 * 8
 lunched = 0
 done = 0
 
-logs = []
+if fs.existsSync 'logs.json'
+    logs = fs.readFileSync 'logs.json'
+    logs = JSON.parse logs
+    N -= logs.length
+    console.log "#{logs.length} logs found"
+    done += logs.length
+    lunched += logs.length
+else
+    logs = []
 
 fork = ->
     lunched++
@@ -21,7 +29,8 @@ fork = ->
         slave.on 'close', ->
             done++
             console.log "SLAVE##{nth} closed"
-            logs[nth-1] = stdout
+            logs.push stdout
+            fs.writeFile 'logs.json', JSON.stringify(logs)
             if done == N
                 callback(logs)
             else
