@@ -21,7 +21,7 @@ class ANN
             iterations: 20000 # max training iterations
             log: true
             logPeriod: 10
-            learningRate: 0.1
+            learningRate: 0.05
 
         @options = _.defaults options, defaults
         @net = new brain.NeuralNetwork()
