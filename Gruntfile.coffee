@@ -7,7 +7,7 @@ module.exports = (grunt) ->
     uglify:
       main:
         files:
-          "js/main.min.js": "js/main.js"
+          "static/main.min.js": "static/main.js"
     coffeeify:
       options:
         debug: true
@@ -15,11 +15,11 @@ module.exports = (grunt) ->
         files: [
           {
             src: ["src/index.coffee"],
-            dest: "js/main.js"
+            dest: "static/main.js"
           }
         ]
     clean:
-      js: ["js/main.js"]
+      js: ["static/main.js"]
     watch:
       scripts:
         options:
