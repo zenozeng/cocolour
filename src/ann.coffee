@@ -77,9 +77,7 @@ class ANN
         getResults = (data) =>
             tests = data.map (scheme) =>
                 rate = @rate scheme
-                expectation = if scheme.score > 0 then "positive" else "negative"
-                match = expectation == rate
-                match
+                scheme.score * rate > 0 # 同号，表明判断相同
             passed = (tests.filter (elem) -> elem).length
             rate = passed / tests.length
             {total: tests.length, passed: passed, rate: rate}
@@ -91,12 +89,14 @@ class ANN
     # Rate given scheme
     #
     # @param [Object] data cocolour style data {rgbColors, score}
-    # @return [Int] {1: like, 0: normal, -1: dislike}
+    # @return [Float] [-1, 1] {1: like, 0: normal, -1: dislike}
     #
     rate: (scheme) ->
         [{input}] = @preprocess [scheme]
-        pairs = _.pairs @fn(input)
-        pairs.sort (a, b) -> b[1] - a[1]
-        pairs[0][0]
+        res = @fn(input)
+        positive = res.positive # 喜欢的可能性 [0, 1]
+        negative = res.negative # 讨厌的可能性 [0, 1]
+        bias = 0.38
+        (positive - bias) * 1 / bias
 
 module.exports = ANN
