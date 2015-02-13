@@ -16,13 +16,6 @@ if cluster.isMaster
     queue = [0..32] # do it 32 times
     tests = []
 
-    info =
-        cpu: cpus.length + " * " + cpus[0].model
-        queue: queue.length
-        trainData: trainData.length
-        verifyData: verifyData.length
-    console.info info
-
     cluster.on 'online', (worker) ->
         console.info "Worker ##{worker.process.pid} online."
 
@@ -41,15 +34,23 @@ if cluster.isMaster
         worker.on 'message', onmessage # on receive message from worker
 
     generateResults = ->
-        rates = tests.map (test) -> test.rate
-        res =
-            tests: "#{verifyData.length} tests * #{tests.length} times = #{tests.length * verifyData.length}"
-            passedRate:
+        getResults = (tests) ->
+            rates = tests.map (test) -> test.rate
+            results =
                 max: math.max rates
                 min: math.min rates
                 mean: math.mean rates
                 median: math.median rates
                 var: math.var rates
+        res =
+            cpu: cpus.length + " * " + cpus[0].model
+            trainData: trainData.length
+            verifyData: verifyData.length
+            tests: "#{verifyData.length} tests * #{tests.length} times = #{tests.length * verifyData.length}"
+            passedRate:
+                all: getResults tests.map((test) -> test.all)
+                positive: getResults tests.map((test) -> test.positive)
+                negative: getResults tests.map((test) -> test.negative)
 
     cluster.on 'exit', (worker, code) ->
         workers = workers.filter (w) -> worker.process.pid isnt w.process.pid

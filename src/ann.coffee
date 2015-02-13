@@ -74,14 +74,19 @@ class ANN
     # @param [Array] data cocolour style data [{rgbColors, score}]
     #
     verify: (data) ->
-        tests = data.map (scheme) =>
-            rate = @rate scheme
-            expectation = if scheme.score > 0 then "positive" else "negative"
-            match = expectation == rate
-            match
-        passed = (tests.filter (elem) -> elem).length
-        rate = passed / tests.length
-        {total: tests.length, passed: passed, rate: rate}
+        getResults = (data) =>
+            tests = data.map (scheme) =>
+                rate = @rate scheme
+                expectation = if scheme.score > 0 then "positive" else "negative"
+                match = expectation == rate
+                match
+            passed = (tests.filter (elem) -> elem).length
+            rate = passed / tests.length
+            {total: tests.length, passed: passed, rate: rate}
+        res =
+            all: getResults(data)
+            positive: getResults(data.filter (scheme) -> scheme.score > 0)
+            negative: getResults(data.filter (scheme) -> scheme.score < 0)
 
     # Rate given scheme
     #
