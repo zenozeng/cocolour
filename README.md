@@ -133,14 +133,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/90
 
-- 给估价函数增加一个 bias
+- 尝试给估价函数增加一个 bias
 
     ```coffeescript
     bias = 0.38
     (positive - bias) * 1 / bias
     ```
 
-    对喜欢的平均预测率现在可达 93%，虽然对讨厌的平均预测率现在降到了 39%
+    对喜欢的平均预测率现在可达 93%，虽然对讨厌的平均预测率现在降到了 39%，综合判断率下降
 
     See also: https://github.com/zenozeng/cocolour/issues/93
 

@@ -7,7 +7,7 @@ data.sort (a, b) -> Math.random() > 0.5
 
 data = data.filter (elem) -> elem.score != 0
 
-n = 600
+n = 900
 
 training = data.filter (elem, index) -> index < n
 test = data.filter (elem, index) -> index >= n

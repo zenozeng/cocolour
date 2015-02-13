@@ -1,4 +1,4 @@
-converter = require("color-convert")()
+converter = require('color-convert')()
 brain = require 'brain'
 _ = require 'lodash'
 math = require 'mathjs'
@@ -94,9 +94,8 @@ class ANN
     rate: (scheme) ->
         [{input}] = @preprocess [scheme]
         res = @fn(input)
-        positive = res.positive # 喜欢的可能性 [0, 1]
-        negative = res.negative # 讨厌的可能性 [0, 1]
-        bias = 0.38
-        (positive - bias) * 1 / bias
+        positive = res.positive # 喜欢的置信度 (confidence) [0, 1]
+        negative = res.negative # 讨厌的执行度 [0, 1]
+        if positive > negative then positive else -negative
 
 module.exports = ANN
