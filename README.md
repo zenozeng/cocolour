@@ -121,6 +121,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/92
 
+- 移除色相、亮度、饱和度方差
+
+    - 平均预测率现在可达 72%
+
+    See also: https://github.com/zenozeng/cocolour/issues/78
+
 ### 2014-10-20 -- 2014-11-09
 
 - 确定神经网络库的选择为 Brain
