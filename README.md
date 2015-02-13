@@ -133,6 +133,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/90
 
+- 给估价函数增加一个 bias
+
+    ```coffeescript
+    bias = 0.38
+    (positive - bias) * 1 / bias
+    ```
+
+    对喜欢的平均预测率现在可达 93%，虽然对讨厌的平均预测率现在降到了 39%
+
+    See also: https://github.com/zenozeng/cocolour/issues/93
+
 ### 2014-10-20 -- 2014-11-09
 
 - 确定神经网络库的选择为 Brain
