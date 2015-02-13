@@ -44,8 +44,14 @@ if cluster.isMaster
                 var: math.var rates
         res =
             cpu: cpus.length + " * " + cpus[0].model
-            trainData: trainData.length
-            verifyData: verifyData.length
+            trainData:
+                total: trainData.length
+                positive: trainData.filter((elem) -> elem.score > 0).length
+                negative: trainData.filter((elem) -> elem.score < 0).length
+            verifyData:
+                total: verifyData.length
+                positive: verifyData.filter((elem) -> elem.score > 0).length
+                negative: verifyData.filter((elem) -> elem.score < 0).length
             tests: "#{verifyData.length} tests * #{tests.length} times = #{tests.length * verifyData.length}"
             passedRate:
                 all: getResults tests.map((test) -> test.all)
