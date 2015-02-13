@@ -13,7 +13,7 @@ math = require 'mathjs'
     JSON.parse fs.readFileSync filename
 
 if cluster.isMaster
-    queue = [0..32] # do it 64 times
+    queue = [0..32] # do it 32 times
     tests = []
 
     info =

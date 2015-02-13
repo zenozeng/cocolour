@@ -113,7 +113,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     - 输出测试结果的 max, min, mean, median 和 var
 
-- 调小了 iterations，预测率基本可以到 71%，而且现在输出结果不再发生大幅度波动了，大概在 1% 以内
+- 调整 iterations 和 errorThresh 来避免过拟合问题
+
+    - 平均预测率基本可以到 71%
+
+    - 而且现在输出结果不再发生大幅度波动了
+
+    See also: https://github.com/zenozeng/cocolour/issues/92
 
 ### 2014-10-20 -- 2014-11-09
 

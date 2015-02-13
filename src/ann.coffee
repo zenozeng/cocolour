@@ -17,9 +17,8 @@ class ANN
     constructor: (options = {}) ->
 
         defaults =
-            errorThresh: 0.005 # error threshold to reach
-            iterations: 50 # max training iterations
-            log: false
+            errorThresh: 0.2 # error threshold to reach
+            iterations: 100 # max training iterations
             learningRate: 0.05
 
         @options = _.defaults options, defaults
