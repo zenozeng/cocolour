@@ -86,18 +86,10 @@ class ANN
             rate = @rate scheme
             expectation = if scheme.score > 0 then "positive" else "negative"
             match = expectation == rate
-            # console.log ""
-            # console.log "Rate: ", rate
-            # console.log "Expectation: ", expectation
-            # console.log "Match?: ", match
             match
         passed = (tests.filter (elem) -> elem).length
         rate = passed / tests.length
-        console.log ""
-        console.log "Tests: ", tests.length
-        console.log "Passed Tests: ", passed
-        console.log "Rate(%): ", rate
-        {length: tests.length, passed: passed, rate: rate}
+        {total: tests.length, passed: passed, rate: rate}
 
     # Rate given scheme
     #

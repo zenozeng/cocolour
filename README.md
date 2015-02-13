@@ -17,6 +17,39 @@ npm install
 
 `grunt watch`
 
+### Test
+
+```
+sudo npm install -g coffee-script
+npm test
+```
+
+## FAQ
+
+### Why HSL?
+
+See also http://zh.wikipedia.org/wiki/HSL%E5%92%8CHSV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4
+
+Section: HSL与HSV的比较
+
+### 讨厌喜欢的分离
+
+事实上，
+似乎喜欢和讨厌的机制是很不一样的，
+所以他们应该被丢到两个堆中去。
+
+如果直接用单个score输出，正确率非常低，只有三十几。
+如果用 [喜欢，不喜欢，一般] 输出，大概61%
+如果用 [喜欢, 不喜欢]，大概68-69%
+
+https://github.com/zenozeng/cocolour/issues/77
+
+## 经验
+
+### BP神经网络命中率波动非常厉害，而且很低？
+
+可能是数据过拟合了，调小你的 iterations 看看会不会有帮助。
+
 ## License
 
 ```
@@ -68,31 +101,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Released under the MIT license
 
-## FAQ
-
-### Why HSL?
-
-See also http://zh.wikipedia.org/wiki/HSL%E5%92%8CHSV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4
-
-Section: HSL与HSV的比较
-
-### 讨厌喜欢的分离
-
-事实上，
-似乎喜欢和讨厌的机制是很不一样的，
-所以他们应该被丢到两个堆中去。
-
-如果直接用单个score输出，正确率非常低，只有三十几。
-如果用 [喜欢，不喜欢，一般] 输出，大概61%
-如果用 [喜欢, 不喜欢]，大概68-69%
-
-https://github.com/zenozeng/cocolour/issues/77
-
 ## 项目日程
 
 ### 2014-02-09 -- 2014-02-15
 
 - 一些前端小调整
+
+- 基于 cluster 模块重写神经网络预测率测试
+
+- 调小了 iterations，预测率基本可以到 71%，而且现在输出结果不再发生大幅度波动了，大概在 1% 以内
 
 ### 2014-10-20 -- 2014-11-09
 
