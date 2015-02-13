@@ -107,7 +107,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 一些前端小调整
 
-- 基于 cluster 模块重写神经网络预测率测试
+- 重写神经网络预测率测试
+
+    - 基于 cluster 模块，使用 process 的 message 通信
+
+    - 输出测试结果的 max, min, mean, median 和 var
 
 - 调小了 iterations，预测率基本可以到 71%，而且现在输出结果不再发生大幅度波动了，大概在 1% 以内
 
