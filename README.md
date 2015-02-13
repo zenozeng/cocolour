@@ -48,7 +48,7 @@ https://github.com/zenozeng/cocolour/issues/77
 
 ### BP神经网络命中率波动非常厉害，而且很低？
 
-可能是数据过拟合了，调小你的 iterations 看看会不会有帮助。
+可能是数据过拟合了，调整 iterations 和 errorThresh 看看会不会有帮助。
 
 ## License
 
@@ -291,12 +291,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       { tests: 242, passed: 160, rate: 0.6611570247933884 } ]
     { tests: 15488, passed: 9983, rate: 0.6445635330578512 }
     ```
-
-- [TODO] Verify 的断点续跑
-
-- [TODO] Verify 时间记录
-
-- [TODO] Verify 中途查看结果
 
 ### 2014-10-13 -- 2014-10-19
 

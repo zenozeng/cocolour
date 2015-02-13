@@ -44,13 +44,6 @@ class ANN
 
             input = _.flatten(hslMatrix)
 
-            # 色相方差，饱和度方差，明度方差
-            hVar = math.var (hslMatrix.map (hsl) -> hsl[0])
-            sVar = math.var (hslMatrix.map (hsl) -> hsl[1])
-            vVar = math.var (hslMatrix.map (hsl) -> hsl[2])
-
-            input = input.concat(hVar, sVar, vVar)
-
             {input: input, output: if scheme.score > 0 then {positive: 1} else {negative: 1}}
 
     # Train data
