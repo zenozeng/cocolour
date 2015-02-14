@@ -1,19 +1,44 @@
 *
   transition all 3s
 
-html, body
+html, body, ul, li
   margin 0
   padding 0
 
+ul, li
+  list-style none
+
 body
-  padding 50px
-  padding-top 20px
   color #555
   min-height 100vh
 
-#header, #schemes, #footer
-  max-width 550px
-  margin 0 auto
+#image
+  width 100%
+  line-height 200px
+  text-align center
+  img
+    width 100%
+
+#nav
+  background #fff
+  line-height 48px
+  div, ul, li
+    padding 0 1em
+    float left
+  li.current
+    background #333
+    color #fff
+  #user
+    padding-right 1em
+    float right
+  &::after
+    display block
+    clear both
+    content ''
+
+#logo
+  font-size 24px
+  font-weight bold
 
 #footer
   clear both
@@ -21,26 +46,6 @@ body
   font-size 12px
   span
     cursor pointer
-
-#logo
-  height 110px
-  overflow hidden
-  padding-bottom 2em
-
-#user
-  float right
-  ul, li
-    list-style none
-    padding 0
-    margin 0
-  li
-    float left
-    margin-left 1em
-    cursor pointer
-  &:after
-    clear both
-    display block
-    content ''
 
 #my-colors
   color #999
@@ -72,13 +77,6 @@ body
     border 1px solid #777
     display inline-block
 
-#image
-  width 100%
-  border 1px solid #ccc
-  line-height 200px
-  text-align center
-  img
-    width 100%
 
 #colors .color
   float left
@@ -138,18 +136,3 @@ body
   .scheme
     &:nth-child(2n)
       float right
-
-@media (min-width: 1200px)
-  body
-    // 用 padding 而非 margin 保证 body dropable
-    padding-left calc(50% - 575px)
-    padding-right calc(50% - 575px)
-  #header
-    width 550px
-    float left
-  #main
-    margin-top 80px
-    width 550px
-    float right
-  #footer
-    max-width 1150px

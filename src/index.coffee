@@ -19,19 +19,11 @@ AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwv
 schemesView = new (require './schemes-view.coffee')(AV, $)
 new (require './user-view.coffee')(AV, $, schemesView)
 
-body = document.body
-body.ondragover = (event) -> event.preventDefault()
-body.ondragend = (event) -> event.preventDefault()
-body.ondragenter = (event) -> event.preventDefault()
-body.ondragleave = (event) -> event.preventDefault()
-body.ondrag = (event) -> event.preventDefault()
-body.ondrop = (event) ->
-    event.preventDefault()
-    box = document.getElementById("image")
-    url = URL.createObjectURL(event.dataTransfer.files[0])
+parseImage = (url) ->
     config =
         src: url
         minCount: 7
+    box = document.getElementById("image")
     colorsClustering config, (clusters) ->
         clusters.sort (a, b) -> b.weight - a.weight
         display clusters
@@ -54,4 +46,16 @@ body.ondrop = (event) ->
         box.appendChild img
     img.src = url
 
+parseImage './static/images/default.jpg'
+
+body = document.body
+body.ondragover = (event) -> event.preventDefault()
+body.ondragend = (event) -> event.preventDefault()
+body.ondragenter = (event) -> event.preventDefault()
+body.ondragleave = (event) -> event.preventDefault()
+body.ondrag = (event) -> event.preventDefault()
+body.ondrop = (event) ->
+    event.preventDefault()
+    url = URL.createObjectURL(event.dataTransfer.files[0])
+    parseImage url
 
