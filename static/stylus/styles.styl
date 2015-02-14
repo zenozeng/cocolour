@@ -1,6 +1,3 @@
-*
-  transition all 3s
-
 html, body, ul, li
   margin 0
   padding 0
@@ -12,21 +9,17 @@ body
   color #555
   min-height 100vh
 
-#image
-  width 100%
-  line-height 200px
-  text-align center
-  img
-    width 100%
-
 #nav
   background #fff
+  font-family 'Merriweather', serif
+  font-weight 900
+  box-shadow 0 0 12px rgba(0, 0, 0, .3)
   line-height 48px
   div, ul, li
     padding 0 1em
     float left
   li.current
-    background #333
+    background #555
     color #fff
   #user
     padding-right 1em
@@ -35,10 +28,11 @@ body
     display block
     clear both
     content ''
+  position relative
+  z-index 100
 
 #logo
   font-size 24px
-  font-weight bold
 
 #footer
   clear both
@@ -77,13 +71,26 @@ body
     border 1px solid #777
     display inline-block
 
+#image
+  width 100%
+  height 60vh
+  background-size cover
+  background-position center center
+  text-align center
+  transition background-position 1s linear
+  position relative
+
+#colors
+  position absolute
+  left 24px
+  bottom 24px
 
 #colors .color
   float left
   width 20px
   height 20px
   margin 6px 6px 0 0
-  border 1px solid #ccc
+  box-shadow 0 0 3px rgba(0, 0, 0, .5)
   &:after
     clear both
     content ""

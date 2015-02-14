@@ -19,11 +19,18 @@ AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwv
 schemesView = new (require './schemes-view.coffee')(AV, $)
 new (require './user-view.coffee')(AV, $, schemesView)
 
+$ ->
+    box = document.getElementById("image")
+    # box.onmousemove = (e) ->
+    #     console.log e
+    #     x = e.clientX * 0.1
+    #     y = e.clientY * 0.1
+    #     box.style.backgroundPosition = "#{x}px #{y}px"
+
 parseImage = (url) ->
     config =
         src: url
         minCount: 7
-    box = document.getElementById("image")
     colorsClustering config, (clusters) ->
         clusters.sort (a, b) -> b.weight - a.weight
         display clusters
@@ -39,12 +46,9 @@ parseImage = (url) ->
         colorSchemes.timeout 800, (err, schemes) ->
             console.error(err) if err
             $("#schemes").html schemesView.generate(schemes)
-    img = new Image
-    img.onload = ->
-        box.style.lineHeight = 0
-        box.innerHTML = ""
-        box.appendChild img
-    img.src = url
+    $ ->
+        box = document.getElementById("image")
+        box.style.backgroundImage = "url(#{url})"
 
 parseImage './static/images/default.jpg'
 
