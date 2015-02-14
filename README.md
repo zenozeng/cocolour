@@ -144,6 +144,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     See also: https://github.com/zenozeng/cocolour/issues/93
 
+- 网站 UI 调整
+
 ### 2014-10-20 -- 2014-11-09
 
 - 确定神经网络库的选择为 Brain
