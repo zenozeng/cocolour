@@ -8,7 +8,6 @@ class UserView
         user = AV.User.current()
         if user?
             html = "<li>" + user.attributes.username + "</li>"
-            html += '<li id="my-colors">My Colors</li>'
             html += '<li id="logout">Logout</li>'
         else
             html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
@@ -24,25 +23,6 @@ class UserView
             self.html()
 
         $('#reset-password-button').click -> $('#password-reset').show()
-
-        $('#user').on 'click', '#my-colors', ->
-            user = AV.User.current()
-            if user
-                username = user.attributes.username
-                Scheme = AV.Object.extend("Scheme")
-                query = new AV.Query(Scheme)
-                query.equalTo("owner", username)
-                query.equalTo("score", 1)
-                query.limit(1000).find {
-                    success: (schemes) ->
-                        schemes = schemes.map (scheme) ->
-                            JSON.parse scheme.attributes.colors
-                        html = schemesView.generate schemes
-                        $('#schemes').html html
-                        $('#image').remove()
-                        $('#colors').remove()
-                        $('#main').css 'float', 'none'
-                }
 
         $('#password-reset .submit').click ->
             email=$('#password-reset .email').val()
@@ -92,6 +72,5 @@ class UserView
                 error: (user, error) ->
                     alert("Error: " + error.code + " " + error.message);
             AV.User.logIn username, password, handler
-
 
 module.exports = UserView

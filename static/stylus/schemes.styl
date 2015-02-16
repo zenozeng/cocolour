@@ -1,0 +1,55 @@
+#schemes
+  padding-top 15px
+  clear both
+  &:after
+    clear both
+    display block
+    content ""
+
+.scheme
+  margin-top 30px
+  width 25%
+  padding 0 2%
+  box-sizing border-box
+  display inline-block
+  &::after
+    clear both
+    display block
+    content ""
+  .colors
+    box-shadow: 3px 0 3px -3px rgba(0, 0, 0, .3) // box shadow for right side
+    &::after
+      clear both
+      display block
+      content ""
+  .color
+    box-shadow: -3px 0 3px -3px rgba(0, 0, 0, .3) // box shadow for left side
+    float left
+    width 20%
+    height 0
+    padding-bottom 20% // based on parent elem's width
+  .button
+    display none !important
+    float left
+    cursor pointer
+    line-height 36px
+    font-size 18px
+    color #ccc
+    display inline-block
+    padding-left 12px
+    text-align center
+    transition color .3s
+  .fa-heart-o
+    border-left 1px solid #ccc
+    &.selected
+      color red
+  .fa-trash-o.selected
+    color black
+
+@media (max-width: 980px)
+  .scheme
+    width 33%
+
+@media (max-width: 600px)
+  .scheme
+    width 50%

@@ -6,34 +6,27 @@ GenePool = require "gene-pool"
 fitness = require "./fitness.coffee"
 $ = require "jquery"
 
-display = (clusters) ->
-    html = clusters.map (cluster) ->
-        color = cluster.color
-        "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
-    html = "<div class='colors'>#{html.join('')}</div>"
-    document.getElementById("colors").innerHTML = html
-
 # Data
 AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
 
 schemesView = new (require './schemes-view.coffee')(AV, $)
 new (require './user-view.coffee')(AV, $, schemesView)
 
-$ ->
-    box = document.getElementById("image")
-    # box.onmousemove = (e) ->
-    #     console.log e
-    #     x = e.clientX * 0.1
-    #     y = e.clientY * 0.1
-    #     box.style.backgroundPosition = "#{x}px #{y}px"
-
 parseImage = (url) ->
     config =
         src: url
         minCount: 7
+
+    displayColors = (clusters) ->
+        html = clusters.map (cluster) ->
+            color = cluster.color
+            "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
+        html = "<div class='colors'>#{html.join('')}</div>"
+        document.getElementById("colors").innerHTML = html
+
     colorsClustering config, (clusters) ->
         clusters.sort (a, b) -> b.weight - a.weight
-        display clusters
+        displayColors clusters
         opts =
             genes: clusters.map (color) -> color.color
             weights: clusters.map (color) -> color.weight
@@ -62,4 +55,21 @@ body.ondrop = (event) ->
     event.preventDefault()
     url = URL.createObjectURL(event.dataTransfer.files[0])
     parseImage url
+
+$('#nav-favorite').click ->
+    user = AV.User.current()
+    if user
+        username = user.attributes.username
+        Scheme = AV.Object.extend("Scheme")
+        query = new AV.Query(Scheme)
+        query.equalTo("owner", username)
+        query.equalTo("score", 1)
+        query.limit(1000).find {
+            success: (schemes) ->
+                schemes = schemes.map (scheme) ->
+                    JSON.parse scheme.attributes.colors
+                html = schemesView.generate schemes
+                $('#schemes').html html
+                $('#image').hide()
+        }
 
