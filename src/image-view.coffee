@@ -41,13 +41,13 @@ class ImageView
         parseImage url
 
         # bind DND events
-        body = document.body
-        body.ondragover = (event) -> event.preventDefault()
-        body.ondragend = (event) -> event.preventDefault()
-        body.ondragenter = (event) -> event.preventDefault()
-        body.ondragleave = (event) -> event.preventDefault()
-        body.ondrag = (event) -> event.preventDefault()
-        body.ondrop = (event) ->
+        target = $('#image')[0]
+        target.ondragover = (event) -> event.preventDefault()
+        target.ondragend = (event) -> event.preventDefault()
+        target.ondragenter = (event) -> event.preventDefault()
+        target.ondragleave = (event) -> event.preventDefault()
+        target.ondrag = (event) -> event.preventDefault()
+        target.ondrop = (event) ->
             event.preventDefault()
             url = URL.createObjectURL(event.dataTransfer.files[0])
             parseImage url
