@@ -1,8 +1,10 @@
+$ = require('jquery')
+
 class UserView
 
-    constructor: (AV, @$, schemesView) ->
+    constructor: (AV) ->
         @html()
-        @bind AV, @$, schemesView
+        @bind AV
 
     html: ->
         user = AV.User.current()
@@ -11,9 +13,9 @@ class UserView
             html += '<li id="logout">Logout</li>'
         else
             html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
-        @$('#user').html "<ul>" + html + "</ul>"
+        $('#user').html "<ul>" + html + "</ul>"
 
-    bind: (AV, $, schemesView) ->
+    bind: (AV) ->
         self = @
         $('#user').on 'click', '#login-button', -> $('#login').toggle()
         $('#user').on 'click', '#signup-button', -> $('#signup').toggle()

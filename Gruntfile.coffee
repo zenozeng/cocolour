@@ -25,7 +25,7 @@ module.exports = (grunt) ->
         options:
           livereload: true
         files: ["src/[^#]*.coffee", "static/stylus/*.styl"]
-        tasks: ["build"],
+        tasks: ["stylus", "coffeeify", "uglify"],
 
   ["uglify", "watch", "stylus", "clean"].map (name) ->
     grunt.loadNpmTasks "grunt-contrib-#{name}"

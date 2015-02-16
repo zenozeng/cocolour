@@ -1,7 +1,9 @@
+AV = window.AV
+$ = require('jquery')
+
 class SchemesView
 
-    constructor: (AV, $) ->
-        @bind AV, $
+    constructor: () ->
 
     generate: (schemes) ->
         html = schemes.map (colors) => @generateScheme(colors)
@@ -18,7 +20,7 @@ class SchemesView
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
 
-    bind: (AV, $) ->
+    bind: ->
         getScore = ($scheme) ->
             if $scheme.find('.fa-heart-o').hasClass 'selected'
                 1
