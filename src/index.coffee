@@ -13,7 +13,7 @@ FavoriteView = require('./favorite-view.coffee')
 $ = require('jquery')
 $ ->
     # Initialize user view
-    new UserView(AV)
+    new UserView()
 
     # Display default view
     new ImageView()

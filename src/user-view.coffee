@@ -1,8 +1,14 @@
+# UserView (Singleton)
+
 $ = require('jquery')
+AV = window.AV
 
 class UserView
 
-    constructor: (AV) ->
+    constructor: ->
+        if UserView.instance
+            return UserView.instance
+        UserView.instance = this
         @html()
         @bind AV
 
