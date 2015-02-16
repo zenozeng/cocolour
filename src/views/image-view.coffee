@@ -1,6 +1,6 @@
 colorsClustering = require "colors-clustering"
 GenePool = require 'gene-pool'
-fitness = require './fitness.coffee'
+fitness = require '../fitness.coffee'
 $ = require 'jquery'
 
 SchemesView = require('./schemes-view.coffee')

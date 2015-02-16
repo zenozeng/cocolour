@@ -6,9 +6,9 @@ if !Array.prototype.map
 AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
 
 # Load views
-ImageView = require('./image-view.coffee')
-UserView = require('./user-view.coffee')
-FavoriteView = require('./favorite-view.coffee')
+ImageView = require('./views/image-view.coffee')
+UserView = require('./views/user-view.coffee')
+FavoriteView = require('./views/favorite-view.coffee')
 
 $ = require('jquery')
 $ ->
