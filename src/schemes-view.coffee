@@ -13,7 +13,8 @@ class SchemesView
             a.some (elem, index) -> elem > b[index]
 
         tmp = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
-        "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>#{tmp.join('')}
+        "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>
+            <div class='colors'>#{tmp.join('')}</div>
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
 

@@ -42,9 +42,6 @@ body
   span
     cursor pointer
 
-#my-colors
-  color #999
-
 #logout
   color #ccc
 
@@ -111,13 +108,19 @@ body
   padding 0 2%
   box-sizing border-box
   display inline-block
-  &:after
+  &::after
     clear both
     display block
     content ""
+  .colors
+    box-shadow: 3px 0 3px -3px rgba(0, 0, 0, .3) // box shadow for right side
+    &::after
+      clear both
+      display block
+      content ""
   .color
-    box-shadow 0 0 3px rgba(0, 0, 0, .3)
-    display inline-block
+    box-shadow: -3px 0 3px -3px rgba(0, 0, 0, .3) // box shadow for left side
+    float left
     width 20%
     height 0
     padding-bottom 20% // based on parent elem's width
@@ -140,10 +143,4 @@ body
     color black
 
 @media (max-width: 649px)
-  .scheme
-    &:nth-child(2n+1)
-      margin-right 200px // 强制撑开
-@media (min-width: 650px)
-  .scheme
-    &:nth-child(2n)
-      float right
+  // do sth
