@@ -12,8 +12,8 @@ class FavoriteView
                 success: (schemes) ->
                     schemes = schemes.map (scheme) ->
                         JSON.parse scheme.attributes.colors
-                    html = schemesView.generate schemes
-                    $('#schemes').html html
+                    $('#schemes').html '' # reset
+                    $('#schemes').append schemesView.generate(schemes)
                     $('#image').hide()
             }
 

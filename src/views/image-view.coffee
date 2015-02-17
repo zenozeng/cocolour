@@ -33,7 +33,9 @@ parseImage = (url) ->
         colorSchemes = new GenePool(opts)
         colorSchemes.timeout 800, (err, schemes) ->
             console.error(err) if err
-            $("#schemes").html schemesView.generate(schemes)
+            console.log schemesView.generate(schemes)
+            $("#schemes").html ''
+            $("#schemes").append schemesView.generate(schemes)
     $('#image').css {backgroundImage: "url(#{url})"}
 
 class ImageView

@@ -85,13 +85,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - colors-clustering
 
-    Copyright (C) 2014 Zeno Zeng
+    Copyright (c) 2014 Zeno Zeng
 
     Released under the MIT license
 
 - gene-pool
 
-    Copyright (C) 2014 Zeno Zeng
+    Copyright (c) 2014 Zeno Zeng
 
     Released under the MIT license
 
