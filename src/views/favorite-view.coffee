@@ -1,5 +1,6 @@
 SchemesView = require('./schemes-view.coffee')
 $ = require('jquery')
+AV = window.AV
 
 class FavoriteView
 

@@ -6,8 +6,9 @@ if !Array.prototype.map
 AV.initialize("ub6plmew80eyd77dcq9p75iue0sywi9zunod1tuq94frmvix", "rl6gggtdevzwvk7g5sbmqx1657giipy5x246dkbrx0t8k6tj")
 
 # Load views
-ImageView = require('./views/image-view.coffee')
 UserView = require('./views/user-view.coffee')
+ImageView = require('./views/image-view.coffee')
+ExploreView = require('./views/explore-view.coffee')
 FavoriteView = require('./views/favorite-view.coffee')
 
 $ = require('jquery')
@@ -19,7 +20,11 @@ $ ->
     new ImageView()
 
     # Bind events
-    $('#nav-favorite').click -> new FavoriteView()
+    $('#nav > ul > li').click ->
+        $('#nav > ul > li.current').removeClass 'current'
+        $(this).addClass 'current'
     $('#nav-create').click -> new ImageView()
+    $('#nav-explore').click -> new ExploreView()
+    $('#nav-favorite').click -> new FavoriteView()
 
 
