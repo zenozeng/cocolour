@@ -2,12 +2,11 @@
 generate = (name, schemes) ->
     gpl = """GIMP Palette
 Name: #{name}
-#
-"""
+#"""
+    gpl += '\n'
     schemes.forEach (scheme) ->
-        gpl += '\n'
         gpl += scheme.join ' '
-        gpl += "\t(#{scheme.join(', ')})"
+        gpl += '\n'
     gpl
 
 module.exports = generate
