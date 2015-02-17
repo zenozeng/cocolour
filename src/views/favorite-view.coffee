@@ -1,3 +1,6 @@
+SchemesView = require('./schemes-view.coffee')
+$ = require('jquery')
+
 class FavoriteView
 
     constructor: ->
@@ -12,8 +15,7 @@ class FavoriteView
                 success: (schemes) ->
                     schemes = schemes.map (scheme) ->
                         JSON.parse scheme.attributes.colors
-                    $('#schemes').html '' # reset
-                    $('#schemes').append schemesView.generate(schemes)
+                    new SchemesView(schemes)
                     $('#image').hide()
             }
 

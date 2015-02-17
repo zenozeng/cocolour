@@ -5,8 +5,6 @@ $ = require 'jquery'
 
 SchemesView = require('./schemes-view.coffee')
 
-schemesView = new SchemesView()
-
 parseImage = (url) ->
     config =
         src: url
@@ -33,13 +31,15 @@ parseImage = (url) ->
         colorSchemes = new GenePool(opts)
         colorSchemes.timeout 800, (err, schemes) ->
             console.error(err) if err
-            console.log schemesView.generate(schemes)
-            $("#schemes").html ''
-            $("#schemes").append schemesView.generate(schemes)
+            new SchemesView(schemes)
     $('#image').css {backgroundImage: "url(#{url})"}
 
 class ImageView
     constructor: (url = './static/images/default.jpg') ->
+        # show #image
+        $('#image').show()
+
+        # parse & show schemes
         parseImage url
 
         # bind DND events

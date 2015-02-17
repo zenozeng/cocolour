@@ -50,7 +50,10 @@ setScore = ($scheme, score) ->
 
 class SchemesView
 
-    constructor: () ->
+    constructor: (schemes) ->
+        $container = $('#schemes')
+        $container.html ''
+        $container.append @generate(schemes)
 
     generate: (schemes) ->
         schemes.map (colors) => @generateScheme(colors)
@@ -61,12 +64,11 @@ class SchemesView
         colors.sort (a, b) ->
             a.some (elem, index) -> elem > b[index]
 
-        colors = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
+        colorsHTML = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
         html = "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>
-            <div class='colors'>#{colors.join('')}</div>
+            <div class='colors'>#{colorsHTML.join('')}</div>
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
-        # FIXME: 似乎这里解析出来的 jQuery 对象不对，好像变成一个 Array 了
         $scheme = $(html)
         $scheme.on 'click', '.fa-heart-o', ->
             if getScore($scheme) is 1 then setScore($scheme, 0) else setScore($scheme, 1)

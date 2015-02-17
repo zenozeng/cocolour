@@ -19,6 +19,7 @@ $ ->
     new ImageView()
 
     # Bind events
-    $('#nav-favorite').click ->
-        new FavoriteView()
+    $('#nav-favorite').click -> new FavoriteView()
+    $('#nav-create').click -> new ImageView()
+
 
