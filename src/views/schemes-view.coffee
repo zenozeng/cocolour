@@ -83,8 +83,7 @@ class SchemesView
         colorsHTML = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
         html = "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>
             <div class='colors'>#{colorsHTML.join('')}</div>
-            <i class='fa fa-download button download-photoshop'>Photoshop</i>
-            <i class='fa fa-download button download-gimp' title='Save it in ~/.gimp-2.8/palettes/ and restart GIMP.'>Gimp Palette</i>
+            <i class='fa fa-download button'></i>
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
         $scheme = $(html)
