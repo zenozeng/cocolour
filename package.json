@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "act-js": "^0.1.0",
     "avoscloud-sdk": "^0.4.4",
     "color-convert": "latest",
     "colors-clustering": ">=0.1.1",

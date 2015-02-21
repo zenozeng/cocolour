@@ -47,6 +47,47 @@
   .fa-trash-o.selected
     color black
 
+#palette-detail-wrapper
+  background rgba(0, 0, 0, .5)
+  position fixed
+  width 100%
+  height 100%
+  top 0
+  left 0
+  z-index 1000
+
+#palette-detail
+  background #fff
+  width 400px
+  height 300px
+  box-sizing border-box
+  padding 20px
+  position fixed
+  top 50%
+  left 50%
+  margin-top -130px
+  margin-left -200px
+  box-shadow 0 0 8px rgba(0, 0, 0, .5)
+  i.fa
+    margin-top .5em
+    font-size 14px
+    cursor pointer
+    &::before
+      padding-right .5em
+  .color
+    font-family monospace
+    font-size 14px
+    line-height 24px
+    .box
+      width 24px
+      height 24px
+      float left
+      margin-right 12px
+      box-shadow 0 -3px 3px -3px rgba(0, 0, 0, .3) // box shadow for left side
+
+#palette-detail-colors
+  margin-bottom 1em
+
 @media (max-width: 980px)
   .scheme
     width 33%

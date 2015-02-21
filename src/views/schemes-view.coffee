@@ -1,5 +1,6 @@
 AV = window.AV
 $ = require('jquery')
+DetailView = require('./detail-view.coffee')
 
 getScore = ($scheme) ->
     if $scheme.find('.fa-heart-o').hasClass 'selected'
@@ -49,21 +50,6 @@ setScore = ($scheme, score) ->
                     scheme.save()
         })
 
-download = (filename, content) ->
-    console.log filename, content
-    content = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
-    $a = $("""<a href="#{content}" download="#{filename}"></a>""")
-    a = $a[0]
-    $('body').append($a)
-
-    # note that $a.click() won't work
-    # setTimeout is necessary because <a> needs to be clickable
-    # see also: http://stackoverflow.com/questions/21403295/js-click-event-needs-settimeout-to-trigger-click-event
-    setTimeout (->
-        a.click()
-        $a.remove()
-    ), 0
-
 class SchemesView
 
     constructor: (schemes) ->
@@ -83,7 +69,7 @@ class SchemesView
         colorsHTML = colors.map (color) -> "<div class='color' style='background: rgb(#{color.join(',')})'></div>"
         html = "<div class='scheme' data-scheme='#{JSON.stringify(colors)}'>
             <div class='colors'>#{colorsHTML.join('')}</div>
-            <i class='fa fa-download button'></i>
+            <i class='fa fa-download detail button'></i>
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
         $scheme = $(html)
@@ -91,12 +77,8 @@ class SchemesView
             if getScore($scheme) is 1 then setScore($scheme, 0) else setScore($scheme, 1)
         $scheme.on 'click', '.fa-trash-o', ->
             if getScore($scheme) is -1 then setScore($scheme, 0) else setScore($scheme, -1)
-        $scheme.on 'click', '.download-gimp', ->
-            user = AV.User.current()
-            username = if user then user.attributes.username + '@'else ''
-            name = username + 'cocolour.com - ' + (new Date()).getTime()
-            gen = require('../lib/gimp-palette.coffee')
-            download name + '.gpl', gen(name, colors)
+        $scheme.on 'click', '.detail, .colors', ->
+            new DetailView(colors)
         $scheme[0]
 
 module.exports = SchemesView
