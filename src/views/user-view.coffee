@@ -2,6 +2,7 @@
 
 $ = require('jquery')
 AV = window.AV
+DialogView = require('./dialog-view.coffee')
 
 class UserView
 
@@ -9,10 +10,10 @@ class UserView
         if UserView.instance
             return UserView.instance
         UserView.instance = this
-        @html()
+        @updateNav()
         @bind AV
 
-    html: ->
+    updateNav: ->
         user = AV.User.current()
         if user?
             html = "<li>" + user.attributes.username + "</li>"
@@ -23,64 +24,103 @@ class UserView
             $('#nav-favorite').hide()
         $('#user').html "<ul>" + html + "</ul>"
 
-    bind: (AV) ->
-        self = @
-        $('#user').on 'click', '#login-button', -> $('#login').toggle()
-        $('#user').on 'click', '#signup-button', -> $('#signup').toggle()
+    displayLoginView: ->
+        html = """
+            <div id="login">
+                <h2>Login</h2>
+                <input type="text" placeholder="Username" class="username">
+                <input type="password" placeholder="Password" class="password">
+                <div class="submit">Login</div>
+                <div id="reset-password-button">Forgot password?</div>
+            </div>
+        """
 
-        $('#user').on 'click', '#logout', ->
-            AV.User.logOut()
-            self.html()
+        $view = $(html)
+        $view.find('#reset-password-button').click => @displayPasswordResetView()
 
-        $('#reset-password-button').click -> $('#password-reset').show()
+        dialogView = new DialogView($view)
 
-        $('#password-reset .submit').click ->
-            email=$('#password-reset .email').val()
-            $this = $(this)
-            handler =
-                success: ->
-                    $this.parent().hide()
-                error: (error) ->
-                    alert("Error: " + error.code + " " + error.message);
-            AV.User.requestPasswordReset email, handler
-
-        $('#signup .submit').click ->
+        $view.find('.submit').click =>
 
             user = new AV.User()
 
-            username = $('#signup .username').val()
-            password = $('#signup .password').val()
-            email=$('#signup .email').val()
+            username = $view.find('.username').val()
+            password = $view.find('.password').val()
+
+            $this = $(this)
+
+            handler =
+                success: (user) =>
+                    @updateNav()
+                    dialogView.hide()
+                error: (user, error) ->
+                    alert("Error: " + error.code + " " + error.message);
+            AV.User.logIn username, password, handler
+
+    displaySignupView: ->
+
+        html = """
+            <div id="signup">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Username" class="username">
+                <input type="password" placeholder="Password" class="password">
+                <input type="email" placeholder="Email" class="email">
+                <div class="submit">Submit</div>
+            </div>
+        """
+
+        $view = $(html)
+
+        dialogView = new DialogView($view)
+
+        $view.find('.submit').click =>
+
+            user = new AV.User()
+
+            username = $view.find('.username').val()
+            password = $view.find('.password').val()
+            email = $view.find('.email').val()
 
             user.set("username", username);
             user.set("password", password);
             user.set("email", email);
 
-            $this = $(this)
-
             handler =
-                success: (user) ->
-                    self.html()
-                    $this.parent().hide()
+                success: (user) =>
+                    @updateNav()
+                    dialogView.hide()
                 error: (user, error) ->
                     alert("Error: " + error.code + " " + error.message);
             user.signUp null, handler
 
-        $('#login .submit').click ->
+    displayPasswordResetView: ->
 
-            user = new AV.User()
+        html = """
+            <div id="password-reset">
+                <h2>Reset Password</h2>
+                <input type="email" placeholder="Email" class="email">
+                <div class="submit">Reset</div>
+            </div>
+        """
 
-            username = $('#login .username').val()
-            password = $('#login .password').val()
+        $view = $(html)
 
-            $this = $(this)
+        dialogView = new DialogView($view)
 
+        $view.find('.submit').click ->
+            email=$('#password-reset .email').val()
             handler =
-                success: (user) ->
-                    self.html()
-                    $this.parent().hide()
-                error: (user, error) ->
+                success: ->
+                    dialogView.hide()
+                error: (error) ->
                     alert("Error: " + error.code + " " + error.message);
-            AV.User.logIn username, password, handler
+            AV.User.requestPasswordReset email, handler
+
+    bind: (AV) ->
+        $('#user').on 'click', '#login-button', => @displayLoginView()
+        $('#user').on 'click', '#signup-button', => @displaySignupView()
+        $('#user').on 'click', '#logout', ->
+            AV.User.logOut()
+            self.updateNav()
 
 module.exports = UserView

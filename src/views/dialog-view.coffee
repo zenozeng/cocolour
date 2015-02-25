@@ -4,9 +4,6 @@ class DialogView
 
     constructor: ($children) ->
         $view = $('#dialog')
-
-        $children.on 'click', (e) -> e.stopPropagation()
-
         $view.html ''
         $view.append $children
 
@@ -22,7 +19,8 @@ class DialogView
             @hide() if e.keyCode is 27
 
         $view = $('#dialog')
-        $view.on 'click', => @hide()
+        $view.on 'click', (e) =>
+            @hide() if e.target.id is 'dialog'
 
     hide: ->
         $('#dialog').fadeOut()
