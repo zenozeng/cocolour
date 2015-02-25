@@ -12,11 +12,11 @@ class FavoriteView
             query = new AV.Query(Scheme)
             query.equalTo("owner", username)
             query.equalTo("score", 1)
-            query.limit(1000).find {
+            query.limit(100).find {
                 success: (schemes) ->
                     schemes = schemes.map (scheme) ->
                         JSON.parse scheme.attributes.colors
-                    new SchemesView(schemes)
+                    new SchemesView(schemes, score = 1)
                     $('#image').hide()
             }
 

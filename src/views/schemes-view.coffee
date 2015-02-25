@@ -52,7 +52,7 @@ setScore = ($scheme, score) ->
 
 class SchemesView
 
-    constructor: (schemes) ->
+    constructor: (schemes, @score = 0) ->
         $container = $('#schemes')
         $container.html ''
         $container.append @generate(schemes)
@@ -73,6 +73,11 @@ class SchemesView
             <i class='fa fa-heart-o button'></i>
             <i class='fa fa-trash-o button'></i></div>"
         $scheme = $(html)
+
+        # apply score
+        $scheme.find('.fa-heart-o').toggleClass('selected', @score > 0)
+        $scheme.find('.fa-trash-o').toggleClass('selected', @score < 0)
+
         $scheme.on 'click', '.fa-heart-o', ->
             if getScore($scheme) is 1 then setScore($scheme, 0) else setScore($scheme, 1)
         $scheme.on 'click', '.fa-trash-o', ->
