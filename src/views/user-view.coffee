@@ -17,8 +17,10 @@ class UserView
         if user?
             html = "<li>" + user.attributes.username + "</li>"
             html += '<li id="logout">Logout</li>'
+            $('#nav-favorite').show()
         else
             html = """<li id="login-button">Login</li><li id="signup-button">Signup</li>"""
+            $('#nav-favorite').hide()
         $('#user').html "<ul>" + html + "</ul>"
 
     bind: (AV) ->
