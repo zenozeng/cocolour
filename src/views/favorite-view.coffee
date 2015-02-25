@@ -10,6 +10,7 @@ class FavoriteView
             username = user.attributes.username
             Scheme = AV.Object.extend("Scheme")
             query = new AV.Query(Scheme)
+            query.descending("updatedAt");
             query.equalTo("owner", username)
             query.equalTo("score", 1)
             query.limit(100).find {
