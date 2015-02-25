@@ -32,7 +32,7 @@ body
   div, ul, li
     padding 0 1em
     float left
-  li
+  & > ul > li
     transition all 1s
     cursor pointer
     &.current
@@ -44,6 +44,8 @@ body
   #user
     padding-right 1em
     float right
+    #logout
+      cursor pointer
   &::after
     display block
     clear both
@@ -65,3 +67,11 @@ body
 #declaration
   color #999
   padding .5em 0
+
+@media (max-width: 768px)
+  #nav
+    font-size 12px
+
+@media (max-width: 640px)
+  #logo
+    display none
