@@ -53,5 +53,15 @@ class ImageView
             event.preventDefault()
             url = URL.createObjectURL(event.dataTransfer.files[0])
             parseImage url
+        $('#load-image').on 'click', ->
+            $input = $('<input type="file">')
+            $('body').append $input
+            $input.on 'change', (e) ->
+                files = $input[0].files
+                if files
+                    url = URL.createObjectURL(files[0])
+                    parseImage url
+                    $input.remove()
+            $input.click()
 
 module.exports = ImageView
