@@ -13,7 +13,8 @@ math = require 'mathjs'
     JSON.parse fs.readFileSync filename
 
 if cluster.isMaster
-    queue = [0..32] # do it 32 times
+    # queue = [0..32] # do it 32 times
+    queue = [0..3]
     tests = []
 
     cluster.on 'online', (worker) ->

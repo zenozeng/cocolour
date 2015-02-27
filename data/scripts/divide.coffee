@@ -32,6 +32,9 @@ dislikes.forEach (elem, i) ->
     else
         verify.push elem
 
+# resort
+likes.sort -> Math.random() > 0.5
+dislike.sort -> Math.random() > 0.5
 
 view = (data, str) ->
     likes = data.filter (elem) -> elem.score > 0

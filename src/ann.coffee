@@ -95,7 +95,7 @@ class ANN
         [{input}] = @preprocess [scheme]
         res = @fn(input)
         positive = res.positive # 喜欢的置信度 (confidence) [0, 1]
-        negative = res.negative # 讨厌的执行度 [0, 1]
+        negative = res.negative # 讨厌的置信任度 [0, 1]
         if positive > negative then positive else -negative
 
 module.exports = ANN
