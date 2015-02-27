@@ -1,6 +1,6 @@
 fs = require 'fs'
 
-data = fs.readFileSync 'all.json'
+data = fs.readFileSync 'data/all.json'
 data = JSON.parse data
 
 # make data random
@@ -42,5 +42,5 @@ view data, 'data'
 view training, 'training'
 view verify, 'verify'
 
-fs.writeFileSync 'training.json', JSON.stringify training, null, 4
-fs.writeFileSync 'verify.json', JSON.stringify verify, null, 4
+fs.writeFileSync 'data/training.json', JSON.stringify training, null, 4
+fs.writeFileSync 'data/verify.json', JSON.stringify verify, null, 4

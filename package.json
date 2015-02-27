@@ -25,6 +25,7 @@
     "test": "test"
   },
   "scripts": {
+    "data": "coffee data/scripts/divide.coffee",
     "test": "coffee test/index.coffee"
   },
   "repository": {

@@ -107,6 +107,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - UI 细节调整、加载速度优化
 
+- 现在切分训练数据与验证数据时会保持 positive 和 negative 的比例
+
 ### 2015-02-16 -- 2015-02-22
 
 - 网站 UI 的进一步重构
