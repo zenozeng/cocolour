@@ -3,17 +3,44 @@ fs = require 'fs'
 data = fs.readFileSync 'all.json'
 data = JSON.parse data
 
+# make data random
 data.sort (a, b) -> Math.random() > 0.5
 
+# remove score = 0
 data = data.filter (elem) -> elem.score != 0
 
-n = 900
+# classify data
+likes = data.filter (elem) -> elem.score > 0
+dislikes = data.filter (elem) -> elem.score < 0
 
-training = data.filter (elem, index) -> index < n
-test = data.filter (elem, index) -> index >= n
+# init collection
+training = []
+verify = []
 
-console.log 'training.json', training.length
-console.log 'verify.json', test.length
+# training : verify = 7 : 3
+rate = 0.7
 
-fs.writeFileSync 'training.json', JSON.stringify training
-fs.writeFileSync 'verify.json', JSON.stringify test
+likes.forEach (elem, i) ->
+    if i < rate * likes.length
+        training.push elem
+    else
+        verify.push elem
+
+dislikes.forEach (elem, i) ->
+    if i < rate * dislikes.length
+        training.push elem
+    else
+        verify.push elem
+
+
+view = (data, str) ->
+    likes = data.filter (elem) -> elem.score > 0
+    dislikes = data.filter (elem) -> elem.score < 0
+    console.log str, { likes: likes.length, dislikes: dislikes.length, scale: likes.length / dislikes.length }
+
+view data, 'data'
+view training, 'training'
+view verify, 'verify'
+
+fs.writeFileSync 'training.json', JSON.stringify training, null, 4
+fs.writeFileSync 'verify.json', JSON.stringify verify, null, 4
