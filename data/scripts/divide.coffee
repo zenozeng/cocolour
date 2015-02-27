@@ -4,7 +4,7 @@ data = fs.readFileSync 'data/all.json'
 data = JSON.parse data
 
 # make data random
-data.sort (a, b) -> Math.random() > 0.5
+data.sort (a, b) -> Math.random() - 0.5
 
 # remove score = 0
 data = data.filter (elem) -> elem.score != 0
@@ -20,21 +20,23 @@ verify = []
 # training : verify = 7 : 3
 rate = 0.7
 
-likes.forEach (elem, i) ->
-    if i < rate * likes.length
-        training.push elem
-    else
-        verify.push elem
-
 dislikes.forEach (elem, i) ->
     if i < rate * dislikes.length
         training.push elem
     else
         verify.push elem
 
+likes.forEach (elem, i) ->
+    console.log i, elem
+    if i < rate * likes.length
+        training.push elem
+    else
+        verify.push elem
+
+
 # resort
-likes.sort -> Math.random() > 0.5
-dislike.sort -> Math.random() > 0.5
+verify = verify.sort -> Math.random() - 0.5
+training = training.sort -> Math.random() - 0.5
 
 view = (data, str) ->
     likes = data.filter (elem) -> elem.score > 0
@@ -45,5 +47,5 @@ view data, 'data'
 view training, 'training'
 view verify, 'verify'
 
-fs.writeFileSync 'data/training.json', JSON.stringify training, null, 4
-fs.writeFileSync 'data/verify.json', JSON.stringify verify, null, 4
+fs.writeFileSync 'data/training.json', JSON.stringify training
+fs.writeFileSync 'data/verify.json', JSON.stringify verify
