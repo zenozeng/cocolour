@@ -27,7 +27,6 @@ dislikes.forEach (elem, i) ->
         verify.push elem
 
 likes.forEach (elem, i) ->
-    console.log i, elem
     if i < rate * likes.length
         training.push elem
     else
