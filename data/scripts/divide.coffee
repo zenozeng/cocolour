@@ -17,8 +17,8 @@ dislikes = data.filter (elem) -> elem.score < 0
 training = []
 verify = []
 
-# training : verify = 7 : 3
-rate = 0.7
+# training : verify = rate : 1 - rate
+rate = 0.8
 
 dislikes.forEach (elem, i) ->
     if i < rate * dislikes.length
