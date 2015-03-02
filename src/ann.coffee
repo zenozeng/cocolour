@@ -23,13 +23,16 @@ class ANN
         #     iterations: 100 # max training iterations
         #     learningRate: 0.05
 
-        defaults = {}
+        defaults =
+            iterations: 15
+            learningRate: 0.05
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
             {type: 'input', out_sx: 5, out_sy: 1, out_depth: 3},
 
             # 2 fully connected layers
+            {type: 'fc', num_neurons: 30, activation: 'sigmoid'},
             {type: 'fc', num_neurons: 30, activation: 'sigmoid'},
 
             # output probabilities
@@ -39,9 +42,10 @@ class ANN
         @net = new convnet.Net()
         @net.makeLayers layers
 
-        @trainer = new convnet.Trainer(@net, {learning_rate: 0.01})
-
         @options = _.defaults options, defaults
+
+        @trainer = new convnet.Trainer(@net, {learning_rate: @options.learningRate})
+
 
     # Convert [[R, G, B], ] to target vector
     #
@@ -77,9 +81,8 @@ class ANN
 
         trainData = data.map (scheme) => @preprocess scheme.colors
 
-        for __ in [0..10]
+        for __ in [0..@options.iterations]
             trainData.forEach (data, i) =>
-                console.log 'train', i
                 @trainer.train data, trainLabels[i]
 
         new Promise((resolve, reject) -> resolve())
