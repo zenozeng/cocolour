@@ -29,14 +29,16 @@ class ANN
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
-            {type: 'input', out_sx: 5, out_sy: 1, out_depth: 3},
+            {type: 'input', out_sx: 15, out_sy: 1, out_depth: 1},
 
-            # 2 fully connected layers
-            {type: 'fc', num_neurons: 30, activation: 'sigmoid'},
-            {type: 'fc', num_neurons: 30, activation: 'sigmoid'},
+            # fully connected layers
+            {type: 'fc', num_neurons: 15, activation: 'sigmoid'},
 
             # output probabilities
-            {type: 'softmax', num_classes: 2}
+            # {type: 'softmax', num_classes: 2}
+
+            # simple binary SVM classifer
+            {type: 'svm', num_classes: 2}
         ]
 
         @net = new convnet.Net()

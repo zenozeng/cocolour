@@ -14,7 +14,7 @@ math = require 'mathjs'
 
 if cluster.isMaster
     # queue = [0..32] # do it 32 times
-    queue = [0..3]
+    queue = [0..8]
     tests = []
 
     cluster.on 'online', (worker) ->
