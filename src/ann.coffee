@@ -3,6 +3,7 @@ _ = require 'lodash'
 math = require 'mathjs'
 convnet = require 'convnetjs'
 brain = require 'brain'
+Promise = require 'promise'
 
 # Simple wrapper of convnet for color schemes
 #
@@ -17,35 +18,52 @@ class ANN
     #
     constructor: (options = {}) ->
 
-        defaults =
-            errorThresh: 0.2 # error threshold to reach
-            iterations: 100 # max training iterations
-            learningRate: 0.05
+        # defaults =
+        #     errorThresh: 0.2 # error threshold to reach
+        #     iterations: 100 # max training iterations
+        #     learningRate: 0.05
+
+        defaults = {}
+
+        layers = [
+            # input: 5 colors * 1 * [H, S, L]
+            {type: 'input', out_sx: 5, out_sy: 1, out_depth: 3},
+
+            # 2 fully connected layers
+            {type: 'fc', num_neurons: 30, activation: 'sigmoid'},
+
+            # output probabilities
+            {type: 'softmax', num_classes: 2}
+        ]
+
+        @net = new convnet.Net()
+        @net.makeLayers layers
+
+        @trainer = new convnet.Trainer(@net, {learning_rate: 0.01})
 
         @options = _.defaults options, defaults
-        @net = new brain.NeuralNetwork()
 
-    # Convert data to hsl vector
+    # Convert [[R, G, B], ] to target vector
     #
-    # @param [Array] data cocolour style data [{rgbColors, score}]
+    # @param [Array] scheme array of RGB Array
     #
-    preprocess: (data) ->
-        data.map (scheme) ->
-            hslMatrix = scheme.colors.map (rgb) ->
-                # convert rgb to hsl
-                hsl = converter.rgb(rgb).hsl()
+    preprocess: (colors) ->
 
-                # normalize hsl to [0, 1]
-                hsl.map (elem, index) ->
-                    if index is 0
-                        elem /= 360
-                    else
-                        elem /= 100
-                    parseFloat elem.toFixed(3)
+        hslMatrix = colors.map (rgb) ->
+            # convert rgb to hsl
+            hsl = converter.rgb(rgb).hsl()
 
-            input = _.flatten(hslMatrix)
+            # normalize hsl to [0, 1]
+            hsl.map (elem, index) ->
+                if index is 0
+                    elem /= 360
+                else
+                    elem /= 100
+                parseFloat elem.toFixed(3)
 
-            {input: input, output: if scheme.score > 0 then {positive: 1} else {negative: 1}}
+        vector = _.flatten(hslMatrix)
+
+        new convnet.Vol(vector)
 
     # Train data
     #
@@ -53,9 +71,18 @@ class ANN
     # @note this method can only be called once
     #
     train: (data) ->
-        @net.train @preprocess(data), @options
-        @fn = @net.toFunction()
+        trainLabels = data.map (scheme) ->
+            # 0 for positive and 1 for nagative
+            if scheme.score > 0 then 0 else 1
 
+        trainData = data.map (scheme) => @preprocess scheme.colors
+
+        for __ in [0..10]
+            trainData.forEach (data, i) =>
+                console.log 'train', i
+                @trainer.train data, trainLabels[i]
+
+        new Promise((resolve, reject) -> resolve())
 
     # Verify data
     #
@@ -80,10 +107,11 @@ class ANN
     # @return [Float] [-1, 1] {1: like, 0: normal, -1: dislike}
     #
     rate: (scheme) ->
-        [{input}] = @preprocess [scheme]
-        res = @fn(input)
-        positive = res.positive # 喜欢的置信度 (confidence) [0, 1]
-        negative = res.negative # 讨厌的置信任度 [0, 1]
-        if positive > negative then positive else -negative
+        input = @preprocess scheme.colors
+        w = @net.forward(input).w
+        positive = w[0]
+        negative = w[1]
+        positive - negative
+        # if positive > negative then positive else -negative
 
 module.exports = ANN

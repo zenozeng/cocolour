@@ -71,8 +71,8 @@ else
     process.on 'message', (msg) ->
         if msg is 'run'
             ann = new ANN {logPeriod: 1000}
-            ann.train trainData
-            process.send {tests: ann.verify(verifyData)}
-            process.send {staus: 'idle'}
+            ann.train(trainData).then ->
+                process.send {tests: ann.verify(verifyData)}
+                process.send {staus: 'idle'}
         if msg is 'exit'
             process.exit(0);

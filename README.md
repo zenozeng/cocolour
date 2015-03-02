@@ -103,6 +103,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2015-03-02 -- 2015-03-08
+
+- [换用 convnetjs 的讨论](https://github.com/zenozeng/cocolour/issues/119)
+
+- [关于个人训练模型的讨论](https://github.com/zenozeng/cocolour/issues/121)
+
 ### 2015-03-23 -- 2015-03-01
 
 - UI 细节调整、加载速度优化
