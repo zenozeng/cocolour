@@ -35,11 +35,11 @@ class ANN
             # fully connected layers
             {type: 'fc', num_neurons: 15, activation: 'sigmoid'},
 
-            # output probabilities
-            # {type: 'softmax', num_classes: 2}
+            # In softmax, the outputs are probabilities that sum to 1
+            {type: 'softmax', num_classes: 2}
 
             # simple binary SVM classifer
-            {type: 'svm', num_classes: 2}
+            # {type: 'svm', num_classes: 2}
         ]
 
         @net = new convnet.Net()
@@ -126,6 +126,8 @@ class ANN
         w = @net.forward(input).w
         positive = w[0]
         negative = w[1]
+        console.log scheme
+        console.log {positive: positive, negative: negative}
         positive - negative
         # if positive > negative then positive else -negative
 
