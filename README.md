@@ -109,6 +109,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - [关于个人训练模型的讨论](https://github.com/zenozeng/cocolour/issues/121)
 
+- Switch to convnetjs
+
+- Try SVM layer and switch back to softmax
+
+- Add min distance
+
 ### 2015-03-23 -- 2015-03-01
 
 - UI 细节调整、加载速度优化

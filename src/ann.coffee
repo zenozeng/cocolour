@@ -30,10 +30,10 @@ class ANN
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
-            {type: 'input', out_sx: 15, out_sy: 1, out_depth: 1},
+            {type: 'input', out_sx: 16, out_sy: 1, out_depth: 1},
 
             # fully connected layers
-            {type: 'fc', num_neurons: 15, activation: 'sigmoid'},
+            {type: 'fc', num_neurons: 16, activation: 'sigmoid'},
 
             # In softmax, the outputs are probabilities that sum to 1
             {type: 'softmax', num_classes: 2}
@@ -77,7 +77,9 @@ class ANN
                     d = c1.map (elem, i) -> elem - c2[i]
                     distance.push hypot.apply(null, d)
 
-        vector.push Math.min.apply(null, distance)
+        minDistance = Math.min.apply(null, distance)
+
+        vector.push (minDistance)
 
         new convnet.Vol(vector)
 
@@ -126,8 +128,13 @@ class ANN
         w = @net.forward(input).w
         positive = w[0]
         negative = w[1]
-        console.log scheme
-        console.log {positive: positive, negative: negative}
+        distance = input.w[15]
+        if distance < 0.07 # the scheme contains 2 very close colors
+            offset = Math.min(positive, 0.4)
+            console.log {positive: positive, negative: negative, offset: offset}
+            positive -= offset
+            negative += offset
+        console.log {colors: scheme.colors, score: scheme.score, distance: distance, output: {positive: positive, negative: negative}}
         positive - negative
         # if positive > negative then positive else -negative
 
