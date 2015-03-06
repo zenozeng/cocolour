@@ -39,7 +39,7 @@
 }).call(this);
 
 
-},{"./views/user-view.coffee":2,"./views/image-view.coffee":3,"./views/explore-view.coffee":4,"./views/favorite-view.coffee":5,"jquery":6}],7:[function(require,module,exports){
+},{"./views/user-view.coffee":2,"./views/image-view.coffee":3,"./views/favorite-view.coffee":4,"./views/explore-view.coffee":5,"jquery":6}],7:[function(require,module,exports){
 (function() {
   var fitness;
 
@@ -9378,7 +9378,7 @@ return jQuery;
 }).call(this);
 
 
-},{"./dialog-view.coffee":8,"jquery":6}],5:[function(require,module,exports){
+},{"./dialog-view.coffee":8,"jquery":6}],4:[function(require,module,exports){
 (function() {
   var $, AV, FavoriteView, SchemesView;
 
@@ -9421,7 +9421,7 @@ return jQuery;
 }).call(this);
 
 
-},{"./schemes-view.coffee":9,"jquery":6}],4:[function(require,module,exports){
+},{"./schemes-view.coffee":9,"jquery":6}],5:[function(require,module,exports){
 (function() {
   var $, AV, ExploreView, SchemesView;
 

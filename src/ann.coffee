@@ -4,6 +4,7 @@ math = require 'mathjs'
 convnet = require 'convnetjs'
 brain = require 'brain'
 Promise = require 'promise'
+hypot = require './lib/hypot'
 
 # Simple wrapper of convnet for color schemes
 #
@@ -68,6 +69,15 @@ class ANN
                 parseFloat elem.toFixed(3)
 
         vector = _.flatten(hslMatrix)
+
+        distance = []
+        for c1 in hslMatrix
+            for c2 in hslMatrix
+                unless c1 is c2
+                    d = c1.map (elem, i) -> elem - c2[i]
+                    distance.push hypot.apply(null, d)
+
+        vector.push Math.min.apply(null, distance)
 
         new convnet.Vol(vector)
 
