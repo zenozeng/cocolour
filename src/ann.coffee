@@ -19,13 +19,8 @@ class ANN
     #
     constructor: (options = {}) ->
 
-        # defaults =
-        #     errorThresh: 0.2 # error threshold to reach
-        #     iterations: 100 # max training iterations
-        #     learningRate: 0.05
-
         defaults =
-            iterations: 15
+            iterations: 18
             learningRate: 0.05
 
         layers = [
@@ -77,9 +72,8 @@ class ANN
                     d = c1.map (elem, i) -> elem - c2[i]
                     distance.push hypot.apply(null, d)
 
-        minDistance = Math.min.apply(null, distance)
-
-        vector.push (minDistance)
+        vector.push Math.min.apply(null, distance) # min distance
+        vector.push math.var(distance, 'biased') # var
 
         new convnet.Vol(vector)
 
