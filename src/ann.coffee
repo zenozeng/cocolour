@@ -19,9 +19,14 @@ class ANN
     #
     constructor: (options = {}) ->
 
+        ########################################################
+        #
+        # First ANN (use [[H, S, L, ...], ])
+        #
+        ########################################################
+
         defaults =
             iterations: 18
-            learningRate: 0.05
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
@@ -42,7 +47,24 @@ class ANN
 
         @options = _.defaults options, defaults
 
-        @trainer = new convnet.Trainer(@net, {learning_rate: @options.learningRate})
+        @trainer = new convnet.Trainer(@net, {
+            method: 'adadelta',
+            learning_rate: 0.05
+
+            # You basically always want to use a non-zero l2_decay.
+            # If it's too high, the network will be regularized very strongly.
+            # This might be a good idea if you have very few training data.
+            # If your training error is also very low (so your network is crushing the training set perfectly),
+            # you may want to increase this a bit to have better generalization.
+            # If your training error is very high (so the network is struggling to learn your data),
+            # you may want to try to decrease it.
+            l2_decay: 0.0005,
+
+            # momentum: 0.9,
+
+            batch_size: 10,
+            # l1_decay: 0.001
+        })
 
 
     # Convert [[R, G, B], ] to target vector
@@ -73,7 +95,7 @@ class ANN
                     distance.push hypot.apply(null, d)
 
         vector.push Math.min.apply(null, distance) # min distance
-        vector.push math.var(distance, 'biased') # var
+        # vector.push math.var(distance, 'biased') # var
 
         new convnet.Vol(vector)
 
@@ -122,13 +144,15 @@ class ANN
         w = @net.forward(input).w
         positive = w[0]
         negative = w[1]
-        distance = input.w[15]
-        if distance < 0.07 # the scheme contains 2 very close colors
-            offset = Math.min(positive, 0.4)
-            console.log {positive: positive, negative: negative, offset: offset}
-            positive -= offset
-            negative += offset
-        console.log {colors: scheme.colors, score: scheme.score, distance: distance, output: {positive: positive, negative: negative}}
+
+        # distance = input.w[15]
+        # if distance < 0.07 # the scheme contains 2 very close colors
+        #     offset = Math.min(positive, 0.4)
+        #     console.log {positive: positive, negative: negative, offset: offset}
+        #     positive -= offset
+        #     negative += offset
+
+        console.log {colors: scheme.colors, score: scheme.score, output: {positive: positive, negative: negative}}
         positive - negative
         # if positive > negative then positive else -negative
 

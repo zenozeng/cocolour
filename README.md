@@ -107,6 +107,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 模拟的举证里增加 `math.var(distance, 'biased')`
 
+- 数据增加到 1441 组
+
 ### 2015-03-02 -- 2015-03-08
 
 - [换用 convnetjs 的讨论](https://github.com/zenozeng/cocolour/issues/119)
