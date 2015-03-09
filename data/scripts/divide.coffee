@@ -18,7 +18,7 @@ training = []
 verify = []
 
 # training : verify = rate : 1 - rate
-rate = 0.8
+rate = 0.7 # 7 : 3
 
 dislikes.forEach (elem, i) ->
     if i < rate * dislikes.length

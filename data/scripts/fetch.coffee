@@ -13,7 +13,7 @@ callback = (data) ->
         obj.createdAt = elem.createdAt
         obj.updatedAt = elem.updatedAt
         obj
-    fs.writeFileSync('all.json', JSON.stringify(data))
+    fs.writeFileSync('data/all.json', JSON.stringify(data))
 
 iter = ->
     query = new AV.Query Scheme
