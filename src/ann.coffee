@@ -21,12 +21,13 @@ class ANN
 
         ########################################################
         #
-        # First ANN (use [[H, S, L, ...], ])
+        # ANN (use [[H, S, L, ...], ])
         #
         ########################################################
 
         defaults =
-            iterations: 18
+            # iterations: 18
+            iterations: 1000
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
@@ -34,6 +35,8 @@ class ANN
 
             # fully connected layers
             {type: 'fc', num_neurons: 16, activation: 'sigmoid'},
+
+            # {type:'regression', num_neurons: 8},
 
             # In softmax, the outputs are probabilities that sum to 1
             {type: 'softmax', num_classes: 2}
@@ -48,8 +51,11 @@ class ANN
         @options = _.defaults options, defaults
 
         @trainer = new convnet.Trainer(@net, {
+            # See also: http://imgur.com/a/Hqolp
             method: 'adadelta',
-            learning_rate: 0.05
+            # method: 'adagrad',
+
+            learning_rate: 0.05,
 
             # You basically always want to use a non-zero l2_decay.
             # If it's too high, the network will be regularized very strongly.
@@ -60,10 +66,8 @@ class ANN
             # you may want to try to decrease it.
             l2_decay: 0.0005,
 
-            # momentum: 0.9,
-
-            batch_size: 10,
-            # l1_decay: 0.001
+            # performs a weight update every 5 examples
+            batch_size: 5
         })
 
 
@@ -111,8 +115,24 @@ class ANN
 
         trainData = data.map (scheme) => @preprocess scheme.colors
 
+        getError = =>
+            count = 0
+            unmatchCount = 0
+            trainData.forEach (data, i) =>
+                isPositive = @rate(data, true) > 0
+                isReallyPositive = trainLabels[i] is 0
+                count++
+                unmatchCount++ unless isPositive == isReallyPositive
+            unmatchCount / count
+
+        lastError = null
         for __ in [0..@options.iterations]
             trainData.forEach (data, i) =>
+                error = getError()
+                if error is lastError
+                    # 已经收敛了，是时候退出循环了
+                    # TODO
+                console.log error
                 @trainer.train data, trainLabels[i]
 
         new Promise((resolve, reject) -> resolve())
@@ -139,8 +159,11 @@ class ANN
     # @param [Object] data cocolour style data {rgbColors, score}
     # @return [Float] [-1, 1] {1: like, 0: normal, -1: dislike}
     #
-    rate: (scheme) ->
-        input = @preprocess scheme.colors
+    rate: (scheme, preprocessed = false) ->
+        unless preprocessed
+            input = @preprocess scheme.colors
+        else
+            input = scheme
         w = @net.forward(input).w
         positive = w[0]
         negative = w[1]
@@ -152,7 +175,7 @@ class ANN
         #     positive -= offset
         #     negative += offset
 
-        console.log {colors: scheme.colors, score: scheme.score, output: {positive: positive, negative: negative}}
+        # console.log {colors: scheme.colors, score: scheme.score, output: {positive: positive, negative: negative}}
         positive - negative
         # if positive > negative then positive else -negative
 

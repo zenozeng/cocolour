@@ -109,6 +109,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - 数据增加到 1441 组
 
+- 将不同人的数据分离进行验证
+
 ### 2015-03-02 -- 2015-03-08
 
 - [换用 convnetjs 的讨论](https://github.com/zenozeng/cocolour/issues/119)

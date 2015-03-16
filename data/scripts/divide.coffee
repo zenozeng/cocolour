@@ -3,6 +3,12 @@ fs = require 'fs'
 data = fs.readFileSync 'data/all.json'
 data = JSON.parse data
 
+# keep owner = zenozeng
+# data = data.filter (elem) -> elem.owner == "zenozeng"
+
+# keep owner = chiyo
+data = data.filter (elem) -> elem.owner == "chiyo"
+
 # make data random
 data.sort (a, b) -> Math.random() - 0.5
 
