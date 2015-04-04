@@ -2,9 +2,10 @@
 
 ## 项目成果
 
-### 实验数据
+### Experimental Data
 
-项目中产生的数据、简单数据获取与分组的脚本存放在 Github 上：
+We use `LeanCould` as our database.
+And the data can be downloaded from our Github Repository.
 
 https://github.com/zenozeng/cocolour/tree/master/data
 
@@ -12,13 +13,19 @@ https://github.com/zenozeng/cocolour/tree/master/data
 其中正向偏好数据 *TODO* 条，负向偏好数据 *TODO* 条。
 共 *TODO* 个账号产生数据。
 
-### 基于 K-Means，CIE76 以及 CSS Color Module Level 3 的图像提取算法
+### Colors Extracting Algorithm based on K-Means，CIE76 and CSS Color Module Level 3
 
 实验过程中我们发现基于 RGB 色彩空间的 K-Means 算法可以快速得到图像中的主要颜色。
 然而 RGB 的色彩距离与对人类感知来说是不均匀的。
 因此换用 CIE2000 这个色彩距离算法，然而由于我们的运行环境是浏览器，
 性能相对还是比较敏感的，
 最后我们换用效果稍逊但是性能更好的 CIE76 算法（较之 CIE2000 少了一些校正因子，就是朴素的 Lab 距离）。
+
+K-Means 的算法特点决定了其结果会非常严重的受到初始值的影响。比如如果取了一个距离多个色比较近的色，这些色彩都会聚合到那个cluster里头去，就会导致严重的色彩损失。为了应对这个现象，增加了初始中心点的数量，然后采用CSS Color Module Level 3 (W3C Recommendation 07 June 2011) 里的颜色关键字来作为种子。这样可以覆盖大多数常见的颜色。事实上效果也相当不错。
+
+一开始使用RGB / HSL距离，但是结果不是很理想。后来去找了业界的色彩公式，换用 CIE2000 来计算。但是时间开销过大。最后采用折中的CIE76（也就是直接计算LAB色彩空间距离），虽然效果没有CIE2000好，但是时间成本却变得可以承受。
+
+Note that images should be scaled to a reasonable size, otherwise it will take a long time to extract colors.
 
 ### Repositories Created
 
