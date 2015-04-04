@@ -103,6 +103,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2015-03-30 -- 2015-04-05
+
+- force login to use setScore, fixes #123
+
 ### 2015-03-16 -- 2015-03-22
 
 - add getError() in ANN.train
@@ -345,7 +349,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - Add RGBA Support for Colors Clustering
 
-- Switch to CIE67 for perfermence
+- Switch to CIE76 for perfermence
 
     see https://github.com/zenozeng/colors-clustering/issues/7
 
