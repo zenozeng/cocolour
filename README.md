@@ -103,6 +103,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2015-03-16 -- 2015-03-22
+
+- add getError() in ANN.train
+
 ### 2015-03-09 -- 2015-03-15
 
 - 模拟的举证里增加 `math.var(distance, 'biased')`

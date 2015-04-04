@@ -11,8 +11,6 @@ getScore = ($scheme) ->
         0
 
 setScore = ($scheme, score) ->
-    $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
-    $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
 
     colors = $scheme.data('scheme')
     colors.sort (a, b) ->
@@ -21,34 +19,40 @@ setScore = ($scheme, score) ->
     colors = JSON.stringify(colors)
     user = AV.User.current()
 
-    if user
-        username =  user.attributes.username
+    unless user
+        $('#login-button').click()
+        return
 
-        Scheme = AV.Object.extend("Scheme")
+    $scheme.find('.fa-heart-o').toggleClass('selected', score > 0)
+    $scheme.find('.fa-trash-o').toggleClass('selected', score < 0)
 
-        query = new AV.Query(Scheme)
-        query.equalTo("colors", colors)
-        query.equalTo("owner", username)
-        query.find({
-            success: (record) ->
-                if record.length is 0
-                    scheme = new Scheme()
+    username =  user.attributes.username
 
-                    scheme.set 'colors', colors
-                    scheme.set 'length', length
-                    scheme.set 'score', score
+    Scheme = AV.Object.extend("Scheme")
 
-                    scheme.set 'owner', username
-                    ACL = new AV.ACL(AV.User.current())
-                    ACL.setPublicReadAccess(true)
-                    scheme.setACL(ACL)
-                    scheme.save()
-                else
-                    # already exits, update it
-                    scheme = record[0]
-                    scheme.set 'score', score
-                    scheme.save()
-        })
+    query = new AV.Query(Scheme)
+    query.equalTo("colors", colors)
+    query.equalTo("owner", username)
+    query.find({
+        success: (record) ->
+            if record.length is 0
+                scheme = new Scheme()
+
+                scheme.set 'colors', colors
+                scheme.set 'length', length
+                scheme.set 'score', score
+
+                scheme.set 'owner', username
+                ACL = new AV.ACL(AV.User.current())
+                ACL.setPublicReadAccess(true)
+                scheme.setACL(ACL)
+                scheme.save()
+            else
+                # already exits, update it
+                scheme = record[0]
+                scheme.set 'score', score
+                scheme.save()
+    })
 
 class SchemesView
 
