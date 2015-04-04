@@ -20,8 +20,6 @@ https://github.com/zenozeng/cocolour/tree/master/data
 性能相对还是比较敏感的，
 最后我们换用效果稍逊但是性能更好的 CIE76 算法（较之 CIE2000 少了一些校正因子，就是朴素的 Lab 距离）。
 
-### 算法可视化 Demo
-
 ### Repositories Created
 
 - [act.js](https://github.com/zenozeng/act.js)
@@ -41,3 +39,16 @@ https://github.com/zenozeng/cocolour/tree/master/data
     - [How to load color table in a indexed mode file??](https://forums.adobe.com/message/2205681#2205681)
 
     - [Color swatch file formats](http://www.selapa.net/swatches/colors/fileformats.php)
+
+- [gene-pool](https://github.com/zenozeng/gene-pool)
+
+    Genetic algorithms in a given gene pool.
+
+    Also, a visualization demo was created: http://zenozeng.github.io/gene-pool/demo/
+
+- [colors-clustering](https://github.com/zenozeng/colors-clustering)
+
+    Colors clustering based on K-means algorithm & CIE76.
+    The seeds are extended color keywords from CSS Color Module Level 3 (W3C Recommendation 07 June 2011).
+
+    Visualization Demo (but in RGB & K-Means): http://zenozeng.github.io/colors-clustering-visualization/
