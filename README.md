@@ -107,7 +107,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 - add ANN.prototype.toJSON
 
-- add ANN.prototype.fromJSON
+- add ANN.fromJSON
 
 ### 2015-03-30 -- 2015-04-05
 

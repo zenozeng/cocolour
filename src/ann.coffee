@@ -173,14 +173,14 @@ class ANN
     toJSON: ->
         JSON.stringify(@net.toJSON())
 
-    # Load network from JSON
-    #
-    # @static
-    # @param [Object] json JSON object
-    #
-    fromJSON: (json) ->
-        ann = new ANN
-        ann.net.fromJSON(json)
-        ann
+# Load network from JSON
+#
+# @static
+# @param [Object] json JSON object
+#
+ANN.fromJSON = (json) ->
+    ann = new ANN
+    ann.net.fromJSON(json)
+    ann
 
 module.exports = ANN

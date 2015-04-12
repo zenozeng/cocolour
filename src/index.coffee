@@ -26,5 +26,3 @@ $ ->
     $('#nav-create').click -> new ImageView()
     $('#nav-explore').click -> new ExploreView()
     $('#nav-favorite').click -> new FavoriteView()
-
-
