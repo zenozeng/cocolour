@@ -1,9 +1,8 @@
-ANN = require 'ann.coffee'
+ANN = require './ann.coffee'
 network = require './network'
 
 ann = ANN.fromJSON network
 
-fitness = (scheme) ->
-    Math.random()
+fitness = (scheme) -> ann.rate(scheme)
 
 module.exports = fitness

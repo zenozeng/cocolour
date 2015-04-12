@@ -2,7 +2,6 @@ converter = require('color-convert')()
 _ = require 'lodash'
 math = require 'mathjs'
 convnet = require 'convnetjs'
-brain = require 'brain'
 Promise = require 'promise'
 hypot = require './lib/hypot'
 
