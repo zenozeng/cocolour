@@ -4,7 +4,7 @@
 
 ### Experimental Data
 
-We use `LeanCould` as our database.
+We use `LeanCould` as our database service.
 And the data can be downloaded from our Github Repository.
 
 https://github.com/zenozeng/cocolour/tree/master/data
@@ -27,7 +27,11 @@ K-Means 的算法特点决定了其结果会非常严重的受到初始值的影
 
 Note that images should be scaled to a reasonable size, otherwise it will take a long time to extract colors.
 
-### Repositories Created
+### 神经网络训练结果
+
+
+
+### Repositories Created (hosted on Github)
 
 - [act.js](https://github.com/zenozeng/act.js)
 

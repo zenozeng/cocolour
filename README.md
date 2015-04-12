@@ -103,6 +103,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## 项目日程
 
+### 2015-04-06 -- 2015-04-12
+
+- add ANN.prototype.toJSON
+
+- add ANN.prototype.fromJSON
+
 ### 2015-03-30 -- 2015-04-05
 
 - force login to use setScore, fixes #123

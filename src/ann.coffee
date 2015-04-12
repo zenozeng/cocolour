@@ -27,7 +27,7 @@ class ANN
 
         defaults =
             # iterations: 18
-            iterations: 1000
+            iterations: 1000 # max iterations
 
         layers = [
             # input: 5 colors * 1 * [H, S, L]
@@ -70,7 +70,6 @@ class ANN
             batch_size: 5
         })
 
-
     # Convert [[R, G, B], ] to target vector
     #
     # @param [Array] scheme array of RGB Array
@@ -110,7 +109,7 @@ class ANN
     #
     train: (data) ->
         trainLabels = data.map (scheme) ->
-            # 0 for positive and 1 for nagative
+            # 0 for positive and 1 for negative
             if scheme.score > 0 then 0 else 1
 
         trainData = data.map (scheme) => @preprocess scheme.colors
@@ -128,12 +127,15 @@ class ANN
         lastError = null
         for __ in [0..@options.iterations]
             trainData.forEach (data, i) =>
-                error = getError()
-                if error is lastError
-                    # 已经收敛了，是时候退出循环了
-                    # TODO
-                console.log error
                 @trainer.train data, trainLabels[i]
+            error = getError()
+            console.log process.pid, error
+            if error < 0.32 # 最大拟合度
+                break
+            # if error is lastError
+            #     # 已经收敛了，是时候退出循环了
+            #     break
+            lastError = error
 
         new Promise((resolve, reject) -> resolve())
 
@@ -168,15 +170,22 @@ class ANN
         positive = w[0]
         negative = w[1]
 
-        # distance = input.w[15]
-        # if distance < 0.07 # the scheme contains 2 very close colors
-        #     offset = Math.min(positive, 0.4)
-        #     console.log {positive: positive, negative: negative, offset: offset}
-        #     positive -= offset
-        #     negative += offset
-
-        # console.log {colors: scheme.colors, score: scheme.score, output: {positive: positive, negative: negative}}
         positive - negative
-        # if positive > negative then positive else -negative
+
+    #
+    # Save network as JSON
+    #
+    toJSON: ->
+        @net.toJSON()
+
+    # Load network from JSON
+    #
+    # @static
+    # @param [Object] json JSON object
+    #
+    fromJSON: (json) ->
+        ann = new ANN
+        ann.net.fromJSON(json)
+        ann
 
 module.exports = ANN

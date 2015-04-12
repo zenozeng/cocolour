@@ -7,7 +7,7 @@ data = JSON.parse data
 # data = data.filter (elem) -> elem.owner == "zenozeng"
 
 # keep owner = chiyo
-data = data.filter (elem) -> elem.owner == "chiyo"
+# data = data.filter (elem) -> elem.owner == "chiyo"
 
 # make data random
 data.sort (a, b) -> Math.random() - 0.5
