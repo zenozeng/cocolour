@@ -124,18 +124,13 @@ class ANN
                 unmatchCount++ unless isPositive == isReallyPositive
             unmatchCount / count
 
-        lastError = null
         for __ in [0..@options.iterations]
             trainData.forEach (data, i) =>
                 @trainer.train data, trainLabels[i]
             error = getError()
             console.log process.pid, error
-            if error < 0.32 # 最大拟合度
+            if error < 0.32 # 最大拟合度，不需要达到收敛（否则就相对过拟合了）
                 break
-            # if error is lastError
-            #     # 已经收敛了，是时候退出循环了
-            #     break
-            lastError = error
 
         new Promise((resolve, reject) -> resolve())
 
@@ -155,6 +150,7 @@ class ANN
             all: getResults(data)
             positive: getResults(data.filter (scheme) -> scheme.score > 0)
             negative: getResults(data.filter (scheme) -> scheme.score < 0)
+            network: @toJSON()
 
     # Rate given scheme
     #
@@ -176,7 +172,7 @@ class ANN
     # Save network as JSON
     #
     toJSON: ->
-        @net.toJSON()
+        JSON.stringify(@net.toJSON())
 
     # Load network from JSON
     #
