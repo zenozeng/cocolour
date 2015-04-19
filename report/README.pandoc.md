@@ -112,14 +112,56 @@ H ∈ [0, 1], S ∈ [0, 1], L ∈ [0, 1]。
 
 将最小色彩距离 push 到该一维数组内得到一个包含 16 元素的一维数组。
 
-#### TODO 训练数据的产生
+#### 训练数据的产生
 
-训练数据主要由小组成员和
+训练数据是由人工标记产生的：
+在本项目的中期之前，我们构建了一个简单系统可以基于图片的颜色随机生成配色。
+用户可在这个系统上，置入图片，然后选择喜欢的配色和不喜欢的配色去标记。
+产生的数据由项目成员 Chiyo Lyn 进行人工筛选，筛去不合理的配色偏好（通常是一些失误标记）。
 
-#### TODO 训练算法
+本项目的数据来源（感谢热心的贡献者！）（字母序）：
 
-神经网络是一个 CPU 运算比较密集的操作，而且由于其存在随机性，
-为了正确判断每次参数调整的结果，
+- Chiyo Lyn (Project Member)
+
+- Coxious (Web Developer, QSC Tech)
+
+- Du Jiakun (Web Developer, Taobao UED)
+
+- Senorsen (Web Developer, QSC Tech)
+
+- Zeno Zeng (Project Member)
+
+- Zhao Kaixiang (Web Developer, QSC Tech)
+
+#### 算法
+
+1. 构造神经网络
+
+```
+layers = [
+    # input: 5 colors * 1 * [H, S, L]
+    {type: 'input', out_sx: 16, out_sy: 1, out_depth: 1},
+
+    # fully connected layers
+    {type: 'fc', num_neurons: 16, activation: 'sigmoid'},
+
+    # {type:'regression', num_neurons: 8},
+
+    # In softmax, the outputs are probabilities that sum to 1
+    {type: 'softmax', num_classes: 2}
+    ```
+
+2. 数据预处理
+
+3. 输入训练样本数据
+
+    对每个训练数据，以 0.05 的学习速率，每五个样例执行一次权重更新。
+
+4. 输入验证数据，并验证结果
+
+#### 结果验证
+
+神经网络是一个 CPU 运算比较密集的操作，而且由于其存在随机性，为了正确判断每次参数调整的结果，
 我们在试验中通过利用多核（用 Node.JS 写了一个简单的 master-slave 模型）来进行多次运算而观察其统计结果的稳定性。
 
 #### 应用训练结果
