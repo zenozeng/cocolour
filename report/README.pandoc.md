@@ -15,13 +15,21 @@ https://github.com/zenozeng/cocolour/tree/master/data
 
 ### Cocolour.com
 
-此处应有图。
-
 - 基于图片的智能配色推荐
+
+    ![after-ann.png](after-ann.png)
 
 - 查看大家的配色
 
+    ![explore.png](explore.png)
+
+- 个人的 Favorite
+
+    ![fav.png](fav.png)
+
 - 用户系统
+
+    ![user.png](user.png)
 
 ### 算法简述
 
@@ -52,7 +60,6 @@ K-Means 的算法特点决定了其结果会非常严重的受到初始值的影
 4. 将 RGB 数组 map 到 Lab 色彩空间下的数组
 5. 载入色彩中心种子（Colors defined in CSS Color Module Level 3），每个独立为一个堆
 6. 对每个颜色，计算其到各个色彩中心的 Lab 空间距离
-
     ```coffeescript
     CIE76 = (lab1, lab2) ->
       sum = 0
@@ -60,7 +67,6 @@ K-Means 的算法特点决定了其结果会非常严重的受到初始值的影
         sum += Math.pow((val - lab2[i]), 2)
       Math.sqrt sum
     ```
-
 7. 对每个颜色，将其置入离其最近的色彩中心所在的堆
 8. 移除空堆
 9. 对每个堆，重新计算色彩中心（离Lab算术平均值距离最近的点）
@@ -108,6 +114,8 @@ H ∈ [0, 1], S ∈ [0, 1], L ∈ [0, 1]。
 
 #### TODO 训练数据的产生
 
+训练数据主要由小组成员和
+
 #### TODO 训练算法
 
 神经网络是一个 CPU 运算比较密集的操作，而且由于其存在随机性，
@@ -125,12 +133,32 @@ H ∈ [0, 1], S ∈ [0, 1], L ∈ [0, 1]。
 在我们的实际工程中这是不现实的。我们采用了遗传算法来进行快速的搜索较优解。
 我们做的假设是：一个较优配色中的颜色应当是较优的。
 基于这个原则，我们构造了一个[遗传算法的库](https://github.com/zenozeng/gene-pool)（基于分片计算，有超时机制）。
-然后定义种群规模为 20，突变率为 0.2，出生率为 1，
+然后定义环境 K 值为 20，突变率为 0.2，出生率为 1，
 最大计算时限为 800ms，
 以色彩权重作为基因的权重（随机出现概率），
 以上述神经网络训练出来的评判函数作为该遗传算法的 fitness 函数。
 
-#### TODO 算法描述
+#### 算法描述
+
+1. 输入产生的颜色作为基因库，一个颜色作为一个基因
+2. 从基因库里随机选取基因作为初代，每个个体含有 5 个互不重叠的基因，初代共有 20 个个体
+3. 生成一个零到一之间的随机数
+4. 若该随机数小于突变率（0.2），从基因库中随机选择一个基因
+5. 若该随机数大于等于突变率，从当前种群中存在的基因里随机获取一个基因
+   ```javascript
+   // 从当前种群中随机获取基因
+   population.getRandomGene = function() {
+       var random = Math.random();
+       // 随机选择，越靠前（fitness较高）的基因有较大概率得到遗传
+       var individual = this.population[(random * random * this.population.length) | 0];
+       return individual[(this.N * random) | 0];
+   };
+   ```
+6. 重复 3-5 过程，直到产生了 20 个新个体，每个个体都应有 5 个互不重叠的基因
+7. 对每个存在的个体计算其 fitness（该评判函数来自上文神经网络训练结果）
+8. 对所有个体按照 fitness 排序（由高到低）
+9. 仅保留 fitness 前二十的个体，舍弃其余个体
+10. 重复 3-9 的过程，直到耗费的总时间达到预设值
 
 ### Repositories Created (hosted on Github)
 
